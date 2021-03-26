@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Eureka客户端配置说明 EurekaInstanceConfig    instanceId:client唯一标识，将此实例从相同appName的集群中区分开来。 appName:注册到eureka server的服务名，相同appName的实例组成集群。 appGroupName:实例所在群组名，用于划分服务。 instanceEnabledOnit:实例启动后是否立即注册到eureka s">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2017/09/25/eureka/eureka-client-config/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="Eureka客户端配置说明 EurekaInstanceConfig    instanceId:client唯一标识，将此实例从相同appName的集群中区分开来。 appName:注册到eureka server的服务名，相同appName的实例组成集群。 appGroupName:实例所在群组名，用于划分服务。 instanceEnabledOnit:实例启动后是否立即注册到eureka s">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-09-25T11:50:00.000Z">
 <meta property="article:modified_time" content="2018-10-17T02:56:26.464Z">
 <meta property="article:author" content="YangLong">
@@ -104,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -133,11 +135,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -225,7 +254,7 @@
 <li>nonSecurePort:非安全端口。</li>
 <li>securePort:安全端口。</li>
 <li>nonSecurePortEnabled:是否启用非安全端口。</li>
-<li>securePortEnabled:是否启用安全端口。<a id="more"></a></li>
+<li>securePortEnabled:是否启用安全端口。<span id="more"></span></li>
 <li>leaseRenewalIntervalInSeconds:向eureka server发送心跳的时间间隔，秒，如果在leaseExpirationDurationInSeconds规定的时间窗口内，server没有收到过心跳，将会把此实例从列表中移除，此示例将无法获得流量，注意如果此示例实现了HealthCheckCallback，那么既使心跳正常，是否对外提供服务还是由回调接口返回值决定。</li>
 <li>leaseExpirationDurationInSeconds:心跳时间窗口，秒，在距离上次收到心跳的时间间隔超过窗口期还未收到新的心跳，则server认为实例已下线。此值设置最小必须超过leaseRenewalIntervalInSeconds的值。</li>
 <li>virtualHostName:虚拟主机名。用于客户端发现此实例。</li>
@@ -420,7 +449,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka客户端配置说明"><span class="nav-number">1.</span> <span class="nav-text">Eureka客户端配置说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置文件属性对照"><span class="nav-number">2.</span> <span class="nav-text">配置文件属性对照</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">Eureka客户端配置说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E5%AF%B9%E7%85%A7"><span class="nav-number">2.</span> <span class="nav-text">配置文件属性对照</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -519,6 +548,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="java内存区域与内存溢出java的内存区域常规的认识中，java的内存区域分为堆和栈，这其实是个很泛的划分。 内存区域 堆内存：所有线程共享的区域，存放对象实例。 方法区（永久代、非堆内存）：所有线程共享此区域，存放已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码数据。在逻辑上属于堆内存一部分，但为了区别开，通常叫做Non-Heap(非堆)。永久代只是GC分代收集中的概念，并不等同">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2016/07/04/memory/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="java内存区域与内存溢出java的内存区域常规的认识中，java的内存区域分为堆和栈，这其实是个很泛的划分。 内存区域 堆内存：所有线程共享的区域，存放对象实例。 方法区（永久代、非堆内存）：所有线程共享此区域，存放已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码数据。在逻辑上属于堆内存一部分，但为了区别开，通常叫做Non-Heap(非堆)。永久代只是GC分代收集中的概念，并不等同">
+<meta property="og:locale">
 <meta property="og:image" content="https://dr-yanglong.github.io/2016/07/04/memory/object-in-memory.png">
 <meta property="og:image" content="https://dr-yanglong.github.io/2016/07/04/memory/mark-word-32bit.png">
 <meta property="og:image" content="https://dr-yanglong.github.io/2016/07/04/memory/mark-word-64bit.png">
@@ -109,6 +110,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -138,11 +140,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -229,7 +258,7 @@
 <li>程序计数器：很小的内存空间，记录当前线程所执行的字节码指令地址。</li>
 <li>直接内存：使用native函数库直接分配的堆外内存，大小不受java堆大小限制，只会受到物理机内存限制。</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">堆内存布局：分为年轻代和年老代，年轻代占1&#x2F;3容量，年老代占2&#x2F;3容量。</span><br><span class="line">年轻代又分为Eden和2个survivor，eden占8&#x2F;10，每个survivor占1&#x2F;10。</span><br><span class="line"></span><br><span class="line">年轻代中对象经过指定次数（默认15）的GC后存活，则转移到年老代中，通过 -XX:MaxTenuringThreshold指定。</span><br><span class="line">如下情况对象会直接进入年老代：</span><br><span class="line">1. 对象大小超过-XX:PretenureSizeThreshold设置的大小的直接进入年老代。</span><br><span class="line">2. 如果Survivo空间中相同年龄的所有对象大小总和大于Survivor空间的一半，年龄大于该年龄的对象直接进入年老代。</span><br></pre></td></tr></table></figure>
 
 <h3 id="OutOfMemory"><a href="#OutOfMemory" class="headerlink" title="OutOfMemory"></a>OutOfMemory</h3><p>除了程序计数器，都会抛出，当创建对象时无法申请到空间时抛出。栈内存比较特殊，根据JVM的具体实现，当JVM对栈的实现是动态扩展的时候，如果扩展时无法申请到足够的内存时抛出。</p>
@@ -241,7 +270,7 @@
 <li>将对象分配的除对象头部分的内存空间都初始化为0。</li>
 <li>对对象进行必要的设置，包括：对象头信息填充，对象init方法的执行，将对象的属性值进行设置。</li>
 </ol>
-<h2 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h2><p>此处参考<a href="https://segmentfault.com/a/1190000004574249" target="_blank" rel="noopener">https://segmentfault.com/a/1190000004574249</a>。<br><img src="./object-in-memory.png" alt="JVM中对象内存布局"><br>对象在内存中分为3个区域：对象头，实例数据，对齐填充，前2个区域一定有，对齐填充是为了补齐，jvm要求对象地址必须是8byte的整数倍。</p>
+<h2 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h2><p>此处参考<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004574249">https://segmentfault.com/a/1190000004574249</a>。<br><img src="./object-in-memory.png" alt="JVM中对象内存布局"><br>对象在内存中分为3个区域：对象头，实例数据，对齐填充，前2个区域一定有，对齐填充是为了补齐，jvm要求对象地址必须是8byte的整数倍。</p>
 <h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><p>对象头分为，Mark Word，klass，如果是数组结构数据，还有一个数组长度。</p>
 <blockquote>
 <p>Mark Word</p>
@@ -334,8 +363,8 @@
       <i class="fa fa-chevron-left"></i> ubuntu编译JDK7
     </a></div>
       <div class="post-nav-item">
-    <a href="/2016/09/08/git-flow/" rel="next" title="Git Flow使用">
-      Git Flow使用 <i class="fa fa-chevron-right"></i>
+    <a href="/2016/09/08/Collection-List/" rel="next" title="Collection之List">
+      Collection之List <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -395,7 +424,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java内存区域与内存溢出"><span class="nav-number">1.</span> <span class="nav-text">java内存区域与内存溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java的内存区域"><span class="nav-number">1.1.</span> <span class="nav-text">java的内存区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存区域"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OutOfMemory"><span class="nav-number">1.1.2.</span> <span class="nav-text">OutOfMemory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StackOverflowError"><span class="nav-number">1.1.3.</span> <span class="nav-text">StackOverflowError</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">2.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">2.1.</span> <span class="nav-text">对象的内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象头"><span class="nav-number">2.1.1.</span> <span class="nav-text">对象头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">实例数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对齐填充"><span class="nav-number">2.1.3.</span> <span class="nav-text">对齐填充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的访问"><span class="nav-number">2.2.</span> <span class="nav-text">对象的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#句柄访问"><span class="nav-number">2.2.1.</span> <span class="nav-text">句柄访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针访问"><span class="nav-number">2.2.2.</span> <span class="nav-text">指针访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">2.2.3.</span> <span class="nav-text">区别</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">java内存区域与内存溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E7%9A%84%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.1.</span> <span class="nav-text">java的内存区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OutOfMemory"><span class="nav-number">1.1.2.</span> <span class="nav-text">OutOfMemory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StackOverflowError"><span class="nav-number">1.1.3.</span> <span class="nav-text">StackOverflowError</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="nav-number">2.1.</span> <span class="nav-text">对象的内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%A4%B4"><span class="nav-number">2.1.1.</span> <span class="nav-text">对象头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.2.</span> <span class="nav-text">实例数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E9%BD%90%E5%A1%AB%E5%85%85"><span class="nav-number">2.1.3.</span> <span class="nav-text">对齐填充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">2.2.</span> <span class="nav-text">对象的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">句柄访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">指针访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">2.2.3.</span> <span class="nav-text">区别</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -494,6 +523,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

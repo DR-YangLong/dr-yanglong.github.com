@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="ubuntu下编译JDK7心里准备安装会遇到各种问题，需要静下心来解决，很多问题谷歌上的和自己本身的不一样，但总的来说编译完成的时候还是觉得很高兴的。各种错的参考地址：http:&#x2F;&#x2F;www.centoscn.com&#x2F;image-text&#x2F;install&#x2F;2015&#x2F;0908&#x2F;6140.html后面才发现的&#x3D; &#x3D;，之前折腾好久 环境介绍操作系统：12dream@dream:~&#x2F;jvm&#x2F;openjdk$">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2016/06/30/ubuntu-build-jdk7/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="ubuntu下编译JDK7心里准备安装会遇到各种问题，需要静下心来解决，很多问题谷歌上的和自己本身的不一样，但总的来说编译完成的时候还是觉得很高兴的。各种错的参考地址：http:&#x2F;&#x2F;www.centoscn.com&#x2F;image-text&#x2F;install&#x2F;2015&#x2F;0908&#x2F;6140.html后面才发现的&#x3D; &#x3D;，之前折腾好久 环境介绍操作系统：12dream@dream:~&#x2F;jvm&#x2F;openjdk$">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-06-30T04:01:56.000Z">
 <meta property="article:modified_time" content="2018-10-17T01:15:15.081Z">
 <meta property="article:author" content="YangLong">
@@ -105,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -134,11 +136,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -215,7 +244,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="ubuntu下编译JDK7"><a href="#ubuntu下编译JDK7" class="headerlink" title="ubuntu下编译JDK7"></a>ubuntu下编译JDK7</h1><h2 id="心里准备"><a href="#心里准备" class="headerlink" title="心里准备"></a>心里准备</h2><p>安装会遇到各种问题，需要静下心来解决，很多问题谷歌上的和自己本身的不一样，但总的来说编译完成的时候还是觉得很高兴的。<br>各种错的参考地址：<a href="http://www.centoscn.com/image-text/install/2015/0908/6140.html" target="_blank" rel="noopener">http://www.centoscn.com/image-text/install/2015/0908/6140.html</a><br>后面才发现的= =，之前折腾好久</p>
+        <h1 id="ubuntu下编译JDK7"><a href="#ubuntu下编译JDK7" class="headerlink" title="ubuntu下编译JDK7"></a>ubuntu下编译JDK7</h1><h2 id="心里准备"><a href="#心里准备" class="headerlink" title="心里准备"></a>心里准备</h2><p>安装会遇到各种问题，需要静下心来解决，很多问题谷歌上的和自己本身的不一样，但总的来说编译完成的时候还是觉得很高兴的。<br>各种错的参考地址：<a target="_blank" rel="noopener" href="http://www.centoscn.com/image-text/install/2015/0908/6140.html">http://www.centoscn.com/image-text/install/2015/0908/6140.html</a><br>后面才发现的= =，之前折腾好久</p>
 <h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><h3 id="操作系统："><a href="#操作系统：" class="headerlink" title="操作系统："></a>操作系统：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dream@dream:~/jvm/openjdk$ uname -a</span><br><span class="line">Linux dream 4.4.0-28-generic <span class="comment">#47-Ubuntu SMP Fri Jun 24 10:09:13 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
 <p>ubuntu 64位，16.04LTS</p>
 <h3 id="jdk"><a href="#jdk" class="headerlink" title="jdk"></a>jdk</h3><p>因为jdk的编译很多也是java编写的，所以也需要一个基础版本的jdk用来编译它，叫bootsrap jdk。</p>
@@ -223,7 +252,7 @@
 <li>bootstrap jdk：sun的jdk6u45，注意尽量不要使用编译目标的同版本或以后版本，会出一些问题。尽量安装编译目标的readme中的环境来。下载并解压。</li>
 <li>目标版本：openjdk7，下载并解压。</li>
 </ol>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="编译所需环境"><a href="#编译所需环境" class="headerlink" title="编译所需环境"></a>编译所需环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ccache make gcc g++ ca-certificates ca-certificates-java</span><br><span class="line">sudo apt-get install libX11-dev libxext-dev libxrender-dev libxtst-dev</span><br><span class="line">sudo apt-get install libasound2-dev libcups2-dev libfreetype6-dev</span><br><span class="line">sudo apt-get install ALSA libcups2-dev</span><br></pre></td></tr></table></figure>
 <p>个人环境不同，有的依赖组件在编译时报错会提示，如果出错提示，再安装即可。</p>
 <h3 id="编译使用脚本"><a href="#编译使用脚本" class="headerlink" title="编译使用脚本"></a>编译使用脚本</h3><p>虽然脚本中有unset jdk环境变量，但是最好还是将自己设置的环境变量注释掉。</p>
@@ -252,7 +281,7 @@
 <p>进行编译。<br>我的4核4线程的编译结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#-- Build times ----------</span><br><span class="line">Target all_product_build</span><br><span class="line">Start 2016-06-30 10:36:48</span><br><span class="line">End   2016-06-30 10:49:06</span><br><span class="line">00:01:03 corba</span><br><span class="line">00:02:52 hotspot</span><br><span class="line">00:00:11 jaxp</span><br><span class="line">00:00:15 jaxws</span><br><span class="line">00:07:37 jdk</span><br><span class="line">00:00:20 langtools</span><br><span class="line">00:12:18 TOTAL</span><br></pre></td></tr></table></figure>
 <p>最后进入编译结果存放的j2sdk-image目录，就是编译的jdk，可以作为完整的jdk使用。测试一下：<br>进入此目录的bin目录下执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dream@dream:~/jvm/build/j2sdk-image/bin$ ./java -version</span><br><span class="line">openjdk version <span class="string">"1.7.0-internal"</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.7.0-internal-root_2016_06_30_10_36-b00)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 24.0-b56, mixed mode)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dream@dream:~/jvm/build/j2sdk-image/bin$ ./java -version</span><br><span class="line">openjdk version <span class="string">&quot;1.7.0-internal&quot;</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.7.0-internal-root_2016_06_30_10_36-b00)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 24.0-b56, mixed mode)</span><br></pre></td></tr></table></figure>
 <p>显示root是因为我使用的是</p>
 <blockquote>
 <p>sudo sh make.sh</p>
@@ -341,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu下编译JDK7"><span class="nav-number">1.</span> <span class="nav-text">ubuntu下编译JDK7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#心里准备"><span class="nav-number">1.1.</span> <span class="nav-text">心里准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境介绍"><span class="nav-number">1.2.</span> <span class="nav-text">环境介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统："><span class="nav-number">1.2.1.</span> <span class="nav-text">操作系统：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk"><span class="nav-number">1.2.2.</span> <span class="nav-text">jdk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译所需环境"><span class="nav-number">1.3.</span> <span class="nav-text">编译所需环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译使用脚本"><span class="nav-number">1.3.1.</span> <span class="nav-text">编译使用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改一些文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">修改一些文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.3.3.</span> <span class="nav-text">编译</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu%E4%B8%8B%E7%BC%96%E8%AF%91JDK7"><span class="nav-number">1.</span> <span class="nav-text">ubuntu下编译JDK7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%83%E9%87%8C%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">心里准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.</span> <span class="nav-text">环境介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">操作系统：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk"><span class="nav-number">1.2.2.</span> <span class="nav-text">jdk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%89%80%E9%9C%80%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">编译所需环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC"><span class="nav-number">1.3.1.</span> <span class="nav-text">编译使用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">修改一些文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">1.3.3.</span> <span class="nav-text">编译</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -440,6 +469,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

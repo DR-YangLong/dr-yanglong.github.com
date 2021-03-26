@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="权限控制 ACL(access control list)zk的权限控制是用过固定的字符串模式来表示的。 权限组成1[scheme]:[id]:[permission] “[  ]”中是字符串变量。  scheme：验证策略，shceme有：world，auth，digest，ip，super。id：权限被赋予的对象，不同的scheme有不同的id。permission：权限组合，为：c[创建]，">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2016/04/07/zk-4/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="权限控制 ACL(access control list)zk的权限控制是用过固定的字符串模式来表示的。 权限组成1[scheme]:[id]:[permission] “[  ]”中是字符串变量。  scheme：验证策略，shceme有：world，auth，digest，ip，super。id：权限被赋予的对象，不同的scheme有不同的id。permission：权限组合，为：c[创建]，">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-04-07T11:30:00.000Z">
 <meta property="article:modified_time" content="2018-10-17T01:15:15.083Z">
 <meta property="article:author" content="YangLong">
@@ -105,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -134,11 +136,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -222,7 +251,7 @@
 <p>scheme：验证策略，shceme有：world，auth，digest，ip，super。<br>id：权限被赋予的对象，不同的scheme有不同的id。<br>permission：权限组合，为：c[创建]，r[读]，d[删除]，w[写]，a[权限控制]中的一个或多个组成。如：crd。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acl权限没有继承关系，仅仅会针对当前节点。</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="ACL组合"><a href="#ACL组合" class="headerlink" title="ACL组合"></a>ACL组合</h2><p>zk通过字符串组合确定访问客户端对zk节点的操作权限。</p>
 <h3 id="world"><a href="#world" class="headerlink" title="world"></a>world</h3><p>与world组合的id只有一个，就是anyone，代表任何人，permission字符串随意组合。<br>eg:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#任何人拥有创建、读取和写入的权限</span><br><span class="line">world:anyone:crw</span><br></pre></td></tr></table></figure>
@@ -329,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#权限控制-ACL-access-control-list"><span class="nav-number">1.</span> <span class="nav-text">权限控制 ACL(access control list)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#权限组成"><span class="nav-number">1.1.</span> <span class="nav-text">权限组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL组合"><span class="nav-number">1.2.</span> <span class="nav-text">ACL组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#world"><span class="nav-number">1.2.1.</span> <span class="nav-text">world</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#digest"><span class="nav-number">1.2.2.</span> <span class="nav-text">digest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auth"><span class="nav-number">1.2.3.</span> <span class="nav-text">auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip"><span class="nav-number">1.2.4.</span> <span class="nav-text">ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">1.2.5.</span> <span class="nav-text">super</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置或获取ACL信息"><span class="nav-number">1.3.</span> <span class="nav-text">设置或获取ACL信息</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6-ACL-access-control-list"><span class="nav-number">1.</span> <span class="nav-text">权限控制 ACL(access control list)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%BB%84%E6%88%90"><span class="nav-number">1.1.</span> <span class="nav-text">权限组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL%E7%BB%84%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text">ACL组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#world"><span class="nav-number">1.2.1.</span> <span class="nav-text">world</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#digest"><span class="nav-number">1.2.2.</span> <span class="nav-text">digest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auth"><span class="nav-number">1.2.3.</span> <span class="nav-text">auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip"><span class="nav-number">1.2.4.</span> <span class="nav-text">ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">1.2.5.</span> <span class="nav-text">super</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%88%96%E8%8E%B7%E5%8F%96ACL%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.</span> <span class="nav-text">设置或获取ACL信息</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -428,6 +457,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Oracle RAC的优势在于利用多个节点（数据库实例）组成一个数据库，这样在保证了数据库高可用性的情况下更充分的利用了多个主机的性能，而且可以通过增加节点进行性能的扩展。实现Oracle RAC需要解决的关键问题就是多节点进行数据访问时如何保证数据的一致性，Oracle是通过各节点间的私有连接进行内存融合（cache fusion）来保证各节点数据访问的一致性。用一个例子来解释一下内存融合的过程">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2015/06/13/oracle-rac/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="Oracle RAC的优势在于利用多个节点（数据库实例）组成一个数据库，这样在保证了数据库高可用性的情况下更充分的利用了多个主机的性能，而且可以通过增加节点进行性能的扩展。实现Oracle RAC需要解决的关键问题就是多节点进行数据访问时如何保证数据的一致性，Oracle是通过各节点间的私有连接进行内存融合（cache fusion）来保证各节点数据访问的一致性。用一个例子来解释一下内存融合的过程">
+<meta property="og:locale">
 <meta property="article:published_time" content="2015-06-13T09:09:56.000Z">
 <meta property="article:modified_time" content="2018-10-17T01:15:15.079Z">
 <meta property="article:author" content="YangLong">
@@ -105,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -134,11 +136,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -218,7 +247,7 @@
         <p>Oracle RAC的优势在于利用多个节点（数据库实例）组成一个数据库，这样在保证了数据库高可用性的情况下更充分的利用了多个主机的性能，而且可以通过增加节点进行性能的扩展。实现Oracle RAC需要解决的关键问题就是多节点进行数据访问时如何保证数据的一致性，Oracle是通过各节点间的私有连接进行内存融合（cache fusion）来保证各节点数据访问的一致性。用一个例子来解释一下内存融合的过程，在存在A、B两个节点的RAC环境中，当A节点使用DML语句（如Update）对一个数据块中的数据进行修改时，A节点实例会到GRD（Global Resource Directory）中查找该数据块的信息，这些信息包括该数据块的Master（第一次读这个数据块的节点），Owner（当前拥有这个数据块的节点），以及数据块在各个节点间的传递记录。A节点如果发现GRD中没有需要读取的数据块的信息，说明该数据块是一个干净的数据块，A节点从磁盘或Buffer Cache中获得该数据块，然后对需要修改的行加锁，进行相应的修改，当然SCN会随之增加。在A完成修改而没有提交或回滚的情况下，如果B节点也需要访问这个数据块修改某些行（假设不同于A修改的行），B同样去到GRD中查找该数据块的信息，当然B发现该数据块的Master为A，Owner也为A，为了保证A的修改不丢失，B需要发信息给A，让A将需要修改的数据块通过私有连接直接从内存中传给B，当然该数据块中包含A的锁信息，这样A节点与B节点间的一次内存的数据传递就是内存融合。Oracle RAC的内存融合也面临一些问题，继续刚刚的例子，如果A又再次请求对该数据块修改或者结束事务（提交或回滚）的时候，又需要从B节点内存中取得数据块，又要发生内存融合，这样在两个节点业务没有合理分割的情况下，数据库繁忙时，大量的内存融合会对数据库性能造成严重的影响。通过对Oracle RAC技术的理解，在实现Oracle RAC架构时的业务分割就成为了保证系统性能的重要手段，业务分割的根本在于使不同的实例不能访问相同的数据块，这样业务分割规则可以小到表的级别（不同的表不会共享一个数据块），大到表空间、Schema的级别。心跳应该用独立的网卡。</p>
 <p>　　当然，rac本身之保证了数据库服务器的高可用和高性能，所以最好有其他的存储技术来保证存储的高可用，例如raid\vplex等。</p>
 <p>　　在距离不太远（几十公里），且速度较快（例如裸光纤）下，延时较小，，米足够多，可以考虑使用oracle rac实现双活或者灾备，RTO RPO=0。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>附：<br>1.rac基本理论知识<br>1.1 Public NIC接入公共网络，private NIC接入私有网络，这是个完全隔离的网络传递的数据只是RAC节点的心跳数据和cache fusion数据。oracle不建议私有网络直接用交叉线连接。</p>
 <p>1.2 RAC最重要的是共享存储。数据文件、联机日志、控制文件、参数文件都必须放在共享存储上。现在的存储环境基本上都是基于SAN的，跑FC协议（FC协议封装了SCSI协议）。</p>
 <p>1.3 RAC环境需要OS必须版本相同包括小版本、补丁包都必须一致。</p>
@@ -508,12 +537,12 @@
 <p>RMAN&gt;run {</p>
 <pre><code> backup as copy db_file_name_convert=(&apos;+DATA/wxxrzm&apos;,&apos;/backup/test&apos;) incremental level 0 database tag &apos;full_backup&apos;;
 
-}</code></pre><p>RMAN&gt;run {</p>
+&#125;</code></pre><p>RMAN&gt;run {</p>
 <pre><code>backup incremental level 1 CUMULATIVE for recover of copy with tag &apos;full_backup&apos; database;
 
 recover copy of database with tag &apos;full_backup&apos;;
 
-}</code></pre><p>增量备份为了获得要备份的数据块，必须对数据文件中的所有数据块进行遍历，效率不高。因此oracle提供了一个特殊的文件叫block change tracking file，每当数据块发生变化时，相关信息同时记录到这个文件中。</p>
+&#125;</code></pre><p>增量备份为了获得要备份的数据块，必须对数据文件中的所有数据块进行遍历，效率不高。因此oracle提供了一个特殊的文件叫block change tracking file，每当数据块发生变化时，相关信息同时记录到这个文件中。</p>
 <p>SQL&gt;alter database enable/disable block change tracking;   –启用关闭该功能。</p>
 <p>SQL&gt;select * from v$block_change_tracking;  –查看文件的位置。</p>
 <p>SQL&gt;alter database enable block change tracking using file ‘path’   –手工指定文件位置。</p>
@@ -757,6 +786,10 @@ recover copy of database with tag &apos;full_backup&apos;;
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

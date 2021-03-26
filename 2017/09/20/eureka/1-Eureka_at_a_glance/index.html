@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Eureka简介Eureka是什么？Eureka是一个基于REST（Representational State Transfer：表述性状态转移）的服务，主要用于对部署在AWS云环境中的服务进行定位、负载均衡和故障转移的中间层服务。我们称这个服务为Eureke Server。Eureka同时提供JAVA客户端组件，Eureka Client，使与eureka服务交互变得更容易。客户端同样内置了基">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2017/09/20/eureka/1-Eureka_at_a_glance/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="Eureka简介Eureka是什么？Eureka是一个基于REST（Representational State Transfer：表述性状态转移）的服务，主要用于对部署在AWS云环境中的服务进行定位、负载均衡和故障转移的中间层服务。我们称这个服务为Eureke Server。Eureka同时提供JAVA客户端组件，Eureka Client，使与eureka服务交互变得更容易。客户端同样内置了基">
+<meta property="og:locale">
 <meta property="og:image" content="https://dr-yanglong.github.io/2017/09/20/eureka/1-Eureka_at_a_glance/eureka_architecture.png">
 <meta property="article:published_time" content="2017-09-20T11:40:56.000Z">
 <meta property="article:modified_time" content="2018-10-17T02:32:43.058Z">
@@ -106,6 +107,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -135,11 +137,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -221,7 +250,7 @@
 <h2 id="Eureka和AWS-ELB之间有什么区别？"><a href="#Eureka和AWS-ELB之间有什么区别？" class="headerlink" title="Eureka和AWS ELB之间有什么区别？"></a>Eureka和AWS ELB之间有什么区别？</h2><p>AWS ELB是为终端用户网络流量提供的边缘服务负载均衡解决方案（ELB像通常使用nginx一样，在用户和server之间进行负载均衡）。Eureka填补了中间层负载平衡的需要。理论上，您可以将您的中间层服务放在AWS ELB后面，但在EC2 classic中，您将它们暴露给外部世界，并失去AWS安全组的所有安全控制。        </p>
 <p>AWS ELB也是一种传统的基于代理的负载均衡解决方案，与之不同的是，Eureka是对实例/服务器/主机级别间进行负载均衡。客户端实例能够感知需要与哪些服务器进行交互的所有信息。这样的好坏取决于你看待它的方式。如果你正在寻找一个基于粘性用户会话的负载均衡，AWS已经提供了，Eureka并没有提供一个解决方案。在Netflix，我们偏向于使用无状态服务。这样有利于可扩展模型并且更加契合Eureka。        </p>
 <p>另一个eureka和传统的基于代理的负载均衡的区别是，应用在负载均衡服务中断后继续对外提供服务，这是因为可用服务器的相关信息已经缓存在了客户端上。这些缓存只需要占用客户端很小的内存，却能带来非常好的弹性（可用性）。     </p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="Eureka和Route-53有什么区别？"><a href="#Eureka和Route-53有什么区别？" class="headerlink" title="Eureka和Route 53有什么区别？"></a>Eureka和Route 53有什么区别？</h2><p>Route 53是一个命名服务，Eureka也能够为中间服务提供相同的服务，两者的相同点仅限于此。Route 53是一个DNS服务：即使在非AWS中也能够提供DNS记录解析服务。Route 53还可以通过AWS分区进行基于延迟的路由。Eureka类似于一个内部DNS服务器，但与其他外界的DNS服务器没有任何关系。Eureka在某种意义上也是被隔离的，因为它并不知道其他AWS分区的Eureka。它保持信息的主要目的是在本分区内进行负载均衡。       </p>
 <p>虽然你可以将你的中间层服务注册到Route 53并依赖AWS的安全组来保护你的应用不受公网访问，但你的中间层服务实际上还是暴漏在了公网上。并且这样做会带来传统的基于DNS负载均衡解决方案的缺点，在这些方案中，即时某些服务已经不健康，甚至已经不存在的情况下（AWS中，服务器可以随时消失），流量仍然会路由到这些服务上去。     </p>
 <h2 id="Netflix怎样使用Eureka？"><a href="#Netflix怎样使用Eureka？" class="headerlink" title="Netflix怎样使用Eureka？"></a>Netflix怎样使用Eureka？</h2><p>在Netflix，Eureka除了作为中间层服务负载均衡外，还用于以下目的：      </p>
@@ -325,7 +354,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka简介"><span class="nav-number">1.</span> <span class="nav-text">Eureka简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka是什么？"><span class="nav-number">1.1.</span> <span class="nav-text">Eureka是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要Eureka？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么需要Eureka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka和AWS-ELB之间有什么区别？"><span class="nav-number">1.3.</span> <span class="nav-text">Eureka和AWS ELB之间有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka和Route-53有什么区别？"><span class="nav-number">1.4.</span> <span class="nav-text">Eureka和Route 53有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix怎样使用Eureka？"><span class="nav-number">1.5.</span> <span class="nav-text">Netflix怎样使用Eureka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用Eureka？"><span class="nav-number">1.6.</span> <span class="nav-text">何时使用Eureka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务的服务端和客户端是如何通讯的？"><span class="nav-number">1.7.</span> <span class="nav-text">服务的服务端和客户端是如何通讯的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高层架构"><span class="nav-number">1.8.</span> <span class="nav-text">高层架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非JAVA的服务端和客户端"><span class="nav-number">1.9.</span> <span class="nav-text">非JAVA的服务端和客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可配置性"><span class="nav-number">1.10.</span> <span class="nav-text">可配置性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹性"><span class="nav-number">1.11.</span> <span class="nav-text">弹性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分区"><span class="nav-number">1.12.</span> <span class="nav-text">多分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监控"><span class="nav-number">1.13.</span> <span class="nav-text">监控</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Eureka简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">Eureka是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Eureka%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">为什么需要Eureka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E5%92%8CAWS-ELB%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">Eureka和AWS ELB之间有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E5%92%8CRoute-53%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">Eureka和Route 53有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix%E6%80%8E%E6%A0%B7%E4%BD%BF%E7%94%A8Eureka%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">Netflix怎样使用Eureka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8Eureka%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">何时使用Eureka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E9%80%9A%E8%AE%AF%E7%9A%84%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">服务的服务端和客户端是如何通讯的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">1.8.</span> <span class="nav-text">高层架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9EJAVA%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.9.</span> <span class="nav-text">非JAVA的服务端和客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%85%8D%E7%BD%AE%E6%80%A7"><span class="nav-number">1.10.</span> <span class="nav-text">可配置性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7"><span class="nav-number">1.11.</span> <span class="nav-text">弹性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E5%8C%BA"><span class="nav-number">1.12.</span> <span class="nav-text">多分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7"><span class="nav-number">1.13.</span> <span class="nav-text">监控</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -424,6 +453,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

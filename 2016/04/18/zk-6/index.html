@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Zookeeper详解客户端连接时如何选择连接节点。  客户端connectstring：localhost:2181,localhost:2182,localhost:2183 通过类client.StaticHostProvider类维护地址列表。 通过解析connectstring后，进行地址随机排序，形成最终的地址列表。 每次从形成的地址列表中选择第一个地址进行连接，如果连接不上再选择第二">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2016/04/18/zk-6/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="Zookeeper详解客户端连接时如何选择连接节点。  客户端connectstring：localhost:2181,localhost:2182,localhost:2183 通过类client.StaticHostProvider类维护地址列表。 通过解析connectstring后，进行地址随机排序，形成最终的地址列表。 每次从形成的地址列表中选择第一个地址进行连接，如果连接不上再选择第二">
+<meta property="og:locale">
 <meta property="og:image" content="https://dr-yanglong.github.io/zk/ZKDatabase.png">
 <meta property="og:image" content="https://dr-yanglong.github.io/zk/DataTree.png">
 <meta property="og:image" content="https://dr-yanglong.github.io/zk/DataNode.png">
@@ -109,6 +110,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -138,11 +140,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -237,7 +266,7 @@
 <li>会话的状态：CONNECTING，CONNECTED，RECONNECTING，RECONNECTED，CLOSE。</li>
 </ol>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h3><p>zk通过SessionTracker接口进行会话管理。</p>
 <blockquote>
 <ol>
@@ -248,7 +277,7 @@
 <blockquote>
 <p>SessionTrackerImpl的维护属性</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//id获取session</span><br><span class="line">HashMap&lt;Long, SessionImpl&gt; sessionsById = new HashMap&lt;Long, SessionImpl&gt;();</span><br><span class="line">//在某个时间点要失效的会话</span><br><span class="line">HashMap&lt;Long, SessionSet&gt; sessionSets = new HashMap&lt;Long, SessionSet&gt;();</span><br><span class="line">//id查看session过期时间</span><br><span class="line">ConcurrentHashMap&lt;Long, Integer&gt; sessionsWithTimeout;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//id获取session</span><br><span class="line">HashMap&lt;Long, SessionImpl&gt; sessionsById = new HashMap&lt;Long, SessionImpl&gt;();</span><br><span class="line">//在某个时间点要失效的会话</span><br><span class="line">HashMap&lt;Long, SessionSet&gt; sessionSets = new HashMap&lt;Long, SessionSet&gt;();</span><br><span class="line">//id查看session过期时间</span><br><span class="line">ConcurrentHashMap&lt;Long, Integer&gt; sessionsWithTimeout;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="如何检查会话是否失效"><a href="#如何检查会话是否失效" class="headerlink" title="如何检查会话是否失效"></a>如何检查会话是否失效</h4><p>zk将所有会话按照失效时间维度进行切分，放入不同的桶中，进行管理，同时冗余到另外的容器中，提供另外2个维度的查询。</p>
 <blockquote>
 <p>会话失效时间计算</p>
@@ -423,7 +452,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Zookeeper详解"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端连接时如何选择连接节点。"><span class="nav-number">1.1.</span> <span class="nav-text">客户端连接时如何选择连接节点。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zk会话"><span class="nav-number">1.2.</span> <span class="nav-text">zk会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是zk会话"><span class="nav-number">1.2.1.</span> <span class="nav-text">什么是zk会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">1.2.2.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何检查会话是否失效"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">如何检查会话是否失效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何高效的检测和清除失效会话"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">如何高效的检测和清除失效会话</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器端数据与存储"><span class="nav-number">1.3.</span> <span class="nav-text">服务器端数据与存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZKDatabase"><span class="nav-number">1.3.1.</span> <span class="nav-text">ZKDatabase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataTree"><span class="nav-number">1.3.2.</span> <span class="nav-text">DataTree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataNode"><span class="nav-number">1.3.3.</span> <span class="nav-text">DataNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志"><span class="nav-number">1.3.4.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快照"><span class="nav-number">1.3.5.</span> <span class="nav-text">快照</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Zookeeper%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%97%B6%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E8%BF%9E%E6%8E%A5%E8%8A%82%E7%82%B9%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">客户端连接时如何选择连接节点。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zk%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.2.</span> <span class="nav-text">zk会话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFzk%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.2.1.</span> <span class="nav-text">什么是zk会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%A3%80%E6%9F%A5%E4%BC%9A%E8%AF%9D%E6%98%AF%E5%90%A6%E5%A4%B1%E6%95%88"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">如何检查会话是否失效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E6%A3%80%E6%B5%8B%E5%92%8C%E6%B8%85%E9%99%A4%E5%A4%B1%E6%95%88%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">如何高效的检测和清除失效会话</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%AD%98%E5%82%A8"><span class="nav-number">1.3.</span> <span class="nav-text">服务器端数据与存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZKDatabase"><span class="nav-number">1.3.1.</span> <span class="nav-text">ZKDatabase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataTree"><span class="nav-number">1.3.2.</span> <span class="nav-text">DataTree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataNode"><span class="nav-number">1.3.3.</span> <span class="nav-text">DataNode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">1.3.4.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E7%85%A7"><span class="nav-number">1.3.5.</span> <span class="nav-text">快照</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -522,6 +551,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="svn迁移到git为什么要从svn迁移到git？svn适合项目管理，将项目产出（包括交付代码）在svn上进行管理，有细粒度的权限控制，但不适合代码管理，svn分支和tag太重，使用svn不容易做到开发流程管控，而且极容易出现代码相互覆盖，git配合git flow可以很容易做到代码开发流程管控。 如何从svn迁移到git git svn命令，git提供了此命令，使使用svn可以使用git命令。 将">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2019/06/16/svn%E8%BF%81%E7%A7%BB%E5%88%B0git/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="svn迁移到git为什么要从svn迁移到git？svn适合项目管理，将项目产出（包括交付代码）在svn上进行管理，有细粒度的权限控制，但不适合代码管理，svn分支和tag太重，使用svn不容易做到开发流程管控，而且极容易出现代码相互覆盖，git配合git flow可以很容易做到代码开发流程管控。 如何从svn迁移到git git svn命令，git提供了此命令，使使用svn可以使用git命令。 将">
+<meta property="og:locale">
 <meta property="article:published_time" content="2019-06-16T12:09:56.000Z">
 <meta property="article:modified_time" content="2019-07-23T09:03:23.729Z">
 <meta property="article:author" content="YangLong">
@@ -104,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -133,11 +135,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -230,14 +259,14 @@
 <p>brew install git subversion</p>
 </blockquote>
 <p>其他操作系统自理。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="git远程准备"><a href="#git远程准备" class="headerlink" title="git远程准备"></a>git远程准备</h3><p>去要迁移的svn代码库，看代码库有多少个svn账号使用此代码库，新建svn用户到git用户的映射文件，格式如下</p>
 <blockquote>
 <p>[svn用户名]=[git用户名][&lt;git用户email&gt;]</p>
 </blockquote>
 <p>中括号为变量标识符，一个文件如下user.txt：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zhang_san&#x3D;张三&lt;zhang_san@leapmotor.com&gt;</span><br><span class="line">yang_long&#x3D;杨龙&lt;yang_long@leapmotor.com&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zhang_san=张三&lt;zhang_san@leapmotor.com&gt;</span><br><span class="line">yang_long=杨龙&lt;yang_long@leapmotor.com&gt;</span><br></pre></td></tr></table></figure>
 
 <p>如果git服务端没有svn的用户，可以先建用户。</p>
 <h3 id="检出svn代码库"><a href="#检出svn代码库" class="headerlink" title="检出svn代码库"></a>检出svn代码库</h3><p>使用git命令检出svn代码库。</p>
@@ -247,7 +276,7 @@
 </blockquote>
 <p>例子：</p>
 <blockquote>
-<p>git svn clone –stdlayout –authors-file=userinfo.txt <a href="https://svn.example.com/web" target="_blank" rel="noopener">https://svn.example.com/web</a> web</p>
+<p>git svn clone –stdlayout –authors-file=userinfo.txt <a target="_blank" rel="noopener" href="https://svn.example.com/web">https://svn.example.com/web</a> web</p>
 </blockquote>
 <h4 id="从非标准svn代码库检出"><a href="#从非标准svn代码库检出" class="headerlink" title="从非标准svn代码库检出"></a>从非标准svn代码库检出</h4><p>SVN仓库目录不标准。<br>检出命令：      </p>
 <blockquote>
@@ -255,7 +284,7 @@
 </blockquote>
 <p>例子：      </p>
 <blockquote>
-<p>git svn clone –trunk=/trunk –branches=/branches –branches=/bugfixes –branches=/releases –tags=/tags –authors-file=userinfo.txt <a href="https://svn.example.com/web" target="_blank" rel="noopener">https://svn.example.com/web</a> web</p>
+<p>git svn clone –trunk=/trunk –branches=/branches –branches=/bugfixes –branches=/releases –tags=/tags –authors-file=userinfo.txt <a target="_blank" rel="noopener" href="https://svn.example.com/web">https://svn.example.com/web</a> web</p>
 </blockquote>
 <h3 id="处理svn分支"><a href="#处理svn分支" class="headerlink" title="处理svn分支"></a>处理svn分支</h3><p>列出当前分支</p>
 <blockquote>
@@ -362,7 +391,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#svn迁移到git"><span class="nav-number">1.</span> <span class="nav-text">svn迁移到git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何从svn迁移到git"><span class="nav-number">1.1.</span> <span class="nav-text">如何从svn迁移到git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git-svn"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装git-svn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git远程准备"><span class="nav-number">1.1.2.</span> <span class="nav-text">git远程准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检出svn代码库"><span class="nav-number">1.1.3.</span> <span class="nav-text">检出svn代码库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从标准svn代码库检出"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">从标准svn代码库检出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从非标准svn代码库检出"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">从非标准svn代码库检出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理svn分支"><span class="nav-number">1.1.4.</span> <span class="nav-text">处理svn分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地代码推送到git远程仓库"><span class="nav-number">1.1.5.</span> <span class="nav-text">本地代码推送到git远程仓库</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#svn%E8%BF%81%E7%A7%BB%E5%88%B0git"><span class="nav-number">1.</span> <span class="nav-text">svn迁移到git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BB%8Esvn%E8%BF%81%E7%A7%BB%E5%88%B0git"><span class="nav-number">1.1.</span> <span class="nav-text">如何从svn迁移到git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85git-svn"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装git-svn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git%E8%BF%9C%E7%A8%8B%E5%87%86%E5%A4%87"><span class="nav-number">1.1.2.</span> <span class="nav-text">git远程准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E5%87%BAsvn%E4%BB%A3%E7%A0%81%E5%BA%93"><span class="nav-number">1.1.3.</span> <span class="nav-text">检出svn代码库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E6%A0%87%E5%87%86svn%E4%BB%A3%E7%A0%81%E5%BA%93%E6%A3%80%E5%87%BA"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">从标准svn代码库检出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E9%9D%9E%E6%A0%87%E5%87%86svn%E4%BB%A3%E7%A0%81%E5%BA%93%E6%A3%80%E5%87%BA"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">从非标准svn代码库检出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86svn%E5%88%86%E6%94%AF"><span class="nav-number">1.1.4.</span> <span class="nav-text">处理svn分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E6%8E%A8%E9%80%81%E5%88%B0git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.5.</span> <span class="nav-text">本地代码推送到git远程仓库</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -461,6 +490,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

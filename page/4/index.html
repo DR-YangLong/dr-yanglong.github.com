@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="java笔记，spring，shiro笔记">
@@ -26,12 +26,9 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/page/4/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="java笔记，spring，shiro笔记">
+<meta property="og:locale">
 <meta property="article:author" content="YangLong">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="spring">
-<meta property="article:tag" content="zookeeper">
-<meta property="article:tag" content="jvm">
-<meta property="article:tag" content="android">
+<meta property="article:tag" content="java,spring,zookeeper,jvm,android">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dr-yanglong.github.io/page/4/">
@@ -106,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -135,11 +133,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -162,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2016/09/08/git-flow/">
+    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2016/09/08/Collection-List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/head.png">
@@ -176,7 +201,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/09/08/git-flow/" class="post-title-link" itemprop="url">Git Flow使用</a>
+            <a href="/2016/09/08/Collection-List/" class="post-title-link" itemprop="url">Collection之List</a>
         </h2>
 
         <div class="post-meta">
@@ -193,7 +218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-11 09:02:16" itemprop="dateModified" datetime="2019-07-11T09:02:16+08:00">2019-07-11</time>
+                <time title="Modified: 2019-07-26 10:08:38" itemprop="dateModified" datetime="2019-07-26T10:08:38+08:00">2019-07-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -201,7 +226,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
                 </span>
             </span>
 
@@ -216,10 +241,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="git-flow入门"><a href="#git-flow入门" class="headerlink" title="git flow入门"></a>git flow入门</h1><p>软件在开发中的周期为：新功能定义-&gt;新功能实现-&gt;新功能测试-&gt;新功能BUG修复-&gt;新功能发布上线-&gt;紧急线上bug修复；<br>使用git的分支以及分支合并可以很好的完成各周期对应的实际操作，但是必须熟知git命令并且规范性比较差，git flow是一个基于git的工作流规范工具。<br>它集成了git的分支，tag等命令，整合为软件开发周期中的各个阶段，可以很容易就实现软件的规范化开发。<br>基本流程图（来源于博客ngulc，不再重复画了）：<br><img src="https://images2015.cnblogs.com/blog/805129/201608/805129-20160814142051093-1392948534.png" alt="FLOW"></p>
+          <h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>ArrayList由Object数组构成,用int类型的size属性记录数组中实际对象的数量，实现了随机访问接口RandomAccess。默认容量是10，最大容量为Integer.MAX_VALUE-8。使用int modCount记录结构变更（增减数组长度）次数，使用指针迭代ArrayList时，<br>指针中的expectedModCount初始为modCount，当在迭代中发现expectedModCount和modCount不相等时，认为结构被其他线程改变了，此时将抛出异常。<br>每次插入、批量新增和删除元素都会对结构作出改变，并对modCount+1，底层通过使用System.arraycopy实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @param      src      the source array.源数组。</span></span><br><span class="line"><span class="comment"> * @param      srcPos   starting position in the source array.要复制的起始位置,包含此位置的元素。</span></span><br><span class="line"><span class="comment"> * @param      dest     the destination array.目标数组。</span></span><br><span class="line"><span class="comment"> * @param      destPos  starting position in the destination data.目标数组放置复制元素的其实位置。</span></span><br><span class="line"><span class="comment"> * @param      length   the number of array elements to be copied.要从源数组复制的元素数量。</span></span><br><span class="line"><span class="comment"> * @exception  IndexOutOfBoundsException  if copying would cause</span></span><br><span class="line"><span class="comment"> *               access of data outside array bounds.</span></span><br><span class="line"><span class="comment"> * @exception  ArrayStoreException  if an element in the &lt;code&gt;src&lt;/code&gt;</span></span><br><span class="line"><span class="comment"> *               array could not be stored into the &lt;code&gt;dest&lt;/code&gt; array</span></span><br><span class="line"><span class="comment"> *               because of a type mismatch.</span></span><br><span class="line"><span class="comment"> * @exception  NullPointerException if either &lt;code&gt;src&lt;/code&gt; or</span></span><br><span class="line"><span class="comment"> *               &lt;code&gt;dest&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object src,  <span class="keyword">int</span>  srcPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    Object dest, <span class="keyword">int</span> destPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    <span class="keyword">int</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2016/09/08/git-flow/#more" rel="contents">
+              <a class="btn" href="/2016/09/08/Collection-List/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -387,7 +413,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="ubuntu下编译JDK7"><a href="#ubuntu下编译JDK7" class="headerlink" title="ubuntu下编译JDK7"></a>ubuntu下编译JDK7</h1><h2 id="心里准备"><a href="#心里准备" class="headerlink" title="心里准备"></a>心里准备</h2><p>安装会遇到各种问题，需要静下心来解决，很多问题谷歌上的和自己本身的不一样，但总的来说编译完成的时候还是觉得很高兴的。<br>各种错的参考地址：<a href="http://www.centoscn.com/image-text/install/2015/0908/6140.html" target="_blank" rel="noopener">http://www.centoscn.com/image-text/install/2015/0908/6140.html</a><br>后面才发现的= =，之前折腾好久</p>
+          <h1 id="ubuntu下编译JDK7"><a href="#ubuntu下编译JDK7" class="headerlink" title="ubuntu下编译JDK7"></a>ubuntu下编译JDK7</h1><h2 id="心里准备"><a href="#心里准备" class="headerlink" title="心里准备"></a>心里准备</h2><p>安装会遇到各种问题，需要静下心来解决，很多问题谷歌上的和自己本身的不一样，但总的来说编译完成的时候还是觉得很高兴的。<br>各种错的参考地址：<a target="_blank" rel="noopener" href="http://www.centoscn.com/image-text/install/2015/0908/6140.html">http://www.centoscn.com/image-text/install/2015/0908/6140.html</a><br>后面才发现的= =，之前折腾好久</p>
 <h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><h3 id="操作系统："><a href="#操作系统：" class="headerlink" title="操作系统："></a>操作系统：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dream@dream:~/jvm/openjdk$ uname -a</span><br><span class="line">Linux dream 4.4.0-28-generic <span class="comment">#47-Ubuntu SMP Fri Jun 24 10:09:13 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
 <p>ubuntu 64位，16.04LTS</p>
 <h3 id="jdk"><a href="#jdk" class="headerlink" title="jdk"></a>jdk</h3><p>因为jdk的编译很多也是java编写的，所以也需要一个基础版本的jdk用来编译它，叫bootsrap jdk。</p>
@@ -574,7 +600,7 @@
 
       
           <h2 id="git入门"><a href="#git入门" class="headerlink" title="git入门"></a>git入门</h2><p>git是一个免费开源的分布式版本控制系统。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener" title="点击下载">gitbash下载</a>,<a href="https://tortoisegit.org/download/" target="_blank" rel="noopener" title="tortoisegit">图形化管理工具下载</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a target="_blank" rel="noopener" href="https://git-scm.com/downloads" title="点击下载">gitbash下载</a>,<a target="_blank" rel="noopener" href="https://tortoisegit.org/download/" title="tortoisegit">图形化管理工具下载</a></p>
 <h3 id="工作区与版本库，暂存区"><a href="#工作区与版本库，暂存区" class="headerlink" title="工作区与版本库，暂存区"></a>工作区与版本库，暂存区</h3><blockquote>
 <p>工作区</p>
 </blockquote>
@@ -856,7 +882,7 @@
 </blockquote>
 <p>maven是一个跨平台的项目管理和构建工具。maven的核心理念是约定大于配置，maven本身已经提供了一套默认设置，这意味着很多东西，使用Maven时都已经默认配置好了，使用者除非必要，不需要去修改那些约定好的内容，比如项目结构，插件等等。</p>
 <h3 id="为什么要使用Maven"><a href="#为什么要使用Maven" class="headerlink" title="为什么要使用Maven"></a>为什么要使用Maven</h3><p>maven使用一个xml配置文件管理项目的相关依赖信息以及构建信息，项目的所有相关设置都在这个入口进行，降低了项目管理的复杂度：进行项目中依赖jar版本统一管理，使项目与开发环境（本地配置，开发工具）解耦。与传统项目构建方式相比，maven将对lib的强依赖转换为引用依赖，一定程度上的减少了不同项目对依赖jar的重复添加。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line">project1需要使用jstl.jar，project2也需要使用jstl.jar，以往的方式是在2个项目的lib中都放入jstl.jar文件。</span><br><span class="line">也就是说在计算机里会同时有2个一样的jar包（另外可以使用引入的方式避免重复，但一般都不会这样做，因为协作的时候不应该依赖本地环境）。</span><br><span class="line">如果有N个项目，那简直爆炸了，相同jar包被在本机存在了N个。如果使用maven，那么我们只需在配置文件中配置一下就解决了问题，所有的项目都将使用同一个jar，至于删除，那没关系，maven会自动去仓库下载此jar。</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line">project1需要使用jstl.jar，project2也需要使用jstl.jar，以往的方式是在2个项目的lib中都放入jstl.jar文件。</span><br><span class="line">也就是说在计算机里会同时有2个一样的jar包（另外可以使用引入的方式避免重复，但一般都不会这样做，因为协作的时候不应该依赖本地环境）。</span><br><span class="line">如果有N个项目，那简直爆炸了，相同jar包被在本机存在了N个。如果使用maven，那么我们只需在配置文件中配置一下就解决了问题，所有的项目都将使用同一个jar，至于删除，那没关系，maven会自动去仓库下载此jar。</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/05/03/maven-guide/#more" rel="contents">
@@ -1215,6 +1241,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

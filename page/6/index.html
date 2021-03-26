@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="java笔记，spring，shiro笔记">
@@ -26,12 +26,9 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/page/6/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="java笔记，spring，shiro笔记">
+<meta property="og:locale">
 <meta property="article:author" content="YangLong">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="spring">
-<meta property="article:tag" content="zookeeper">
-<meta property="article:tag" content="jvm">
-<meta property="article:tag" content="android">
+<meta property="article:tag" content="java,spring,zookeeper,jvm,android">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dr-yanglong.github.io/page/6/">
@@ -106,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -135,11 +133,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -313,7 +338,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="WIN下zookeeper单机集群"><a href="#WIN下zookeeper单机集群" class="headerlink" title="WIN下zookeeper单机集群"></a>WIN下zookeeper单机集群</h1><p>版本：Release 3.5.1-alpha 点击下载：<a href="http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz" target="_blank" rel="noopener">http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz</a></p>
+          <h1 id="WIN下zookeeper单机集群"><a href="#WIN下zookeeper单机集群" class="headerlink" title="WIN下zookeeper单机集群"></a>WIN下zookeeper单机集群</h1><p>版本：Release 3.5.1-alpha 点击下载：<a target="_blank" rel="noopener" href="http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz">http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz</a></p>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>zookeeper单机集群和集群类似，只不过需要修改zk数据交换端口，选举端口和客户端链接端口</p>
 <h2 id="一、配置zoo-cfg"><a href="#一、配置zoo-cfg" class="headerlink" title="一、配置zoo.cfg"></a>一、配置zoo.cfg</h2><p>将下载的文件解压，先如下配置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=d:\\tmp\\zookeeperA</span><br><span class="line">clientPort=2181</span><br></pre></td></tr></table></figure>
@@ -321,6 +346,101 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/04/04/zk-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2016/04/03/android/android-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/head.png">
+      <meta itemprop="name" content="YangLong">
+      <meta itemprop="description" content="java笔记，spring，shiro笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人JAVA开发笔记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/04/03/android/android-1/" class="post-title-link" itemprop="url">Android学习第一课</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-03 18:01:56" itemprop="dateCreated datePublished" datetime="2016-04-03T18:01:56+08:00">2016-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-10-17 09:15:15" itemprop="dateModified" datetime="2018-10-17T09:15:15+08:00">2018-10-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="第一课笔记"><a href="#第一课笔记" class="headerlink" title="第一课笔记"></a>第一课笔记</h1><h2 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h2><h3 id="一、XML（可扩展性标记语言）"><a href="#一、XML（可扩展性标记语言）" class="headerlink" title="一、XML（可扩展性标记语言）"></a>一、XML（可扩展性标记语言）</h3><h4 id="element（元素）"><a href="#element（元素）" class="headerlink" title="element（元素）"></a>element（元素）</h4><blockquote>
+<p>xml的元素指开始标签知道结束标签的部分</p>
+</blockquote>
+<p>如</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">book</span>&gt;</span>this is a book<span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面<strong><book></strong>到<strong></book></strong>就是一个元素，称为book。</p>
+<blockquote>
+<p>元素之间的部分就是元素的值，比如上面的”this is a book”，有时候元素还拥有子元素，大部分的时候，xml由大量的元素，子元素组成一个树形结构</p>
+</blockquote>
+<h4 id="attribute（属性）"><a href="#attribute（属性）" class="headerlink" title="attribute（属性）"></a>attribute（属性）</h4><blockquote>
+<p>xml的属性指每个元素可以携带的额外信息</p>
+</blockquote>
+<p>如</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">book</span> <span class="attr">bokName</span>=<span class="string">&quot;精通JAVA&quot;</span>  <span class="attr">bookPrice</span>=<span class="string">&quot;25.00&quot;</span>&gt;</span></span><br><span class="line">    this is a book</span><br><span class="line"><span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面book元素开始标签内的<strong>bokName</strong>和<strong>bookPrice</strong>就是属性，表示book的一些附加信息，当然这些信息也可以在<strong>子元素</strong>中描述。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/04/03/android/android-1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -435,101 +555,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2016/04/03/android/android-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/head.png">
-      <meta itemprop="name" content="YangLong">
-      <meta itemprop="description" content="java笔记，spring，shiro笔记">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人JAVA开发笔记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/04/03/android/android-1/" class="post-title-link" itemprop="url">Android学习第一课</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-04-03 18:01:56" itemprop="dateCreated datePublished" datetime="2016-04-03T18:01:56+08:00">2016-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-10-17 09:15:15" itemprop="dateModified" datetime="2018-10-17T09:15:15+08:00">2018-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第一课笔记"><a href="#第一课笔记" class="headerlink" title="第一课笔记"></a>第一课笔记</h1><h2 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h2><h3 id="一、XML（可扩展性标记语言）"><a href="#一、XML（可扩展性标记语言）" class="headerlink" title="一、XML（可扩展性标记语言）"></a>一、XML（可扩展性标记语言）</h3><h4 id="element（元素）"><a href="#element（元素）" class="headerlink" title="element（元素）"></a>element（元素）</h4><blockquote>
-<p>xml的元素指开始标签知道结束标签的部分</p>
-</blockquote>
-<p>如</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">book</span>&gt;</span>this is a book<span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面<strong><book></strong>到<strong></book></strong>就是一个元素，称为book。</p>
-<blockquote>
-<p>元素之间的部分就是元素的值，比如上面的”this is a book”，有时候元素还拥有子元素，大部分的时候，xml由大量的元素，子元素组成一个树形结构</p>
-</blockquote>
-<h4 id="attribute（属性）"><a href="#attribute（属性）" class="headerlink" title="attribute（属性）"></a>attribute（属性）</h4><blockquote>
-<p>xml的属性指每个元素可以携带的额外信息</p>
-</blockquote>
-<p>如</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">book</span> <span class="attr">bokName</span>=<span class="string">"精通JAVA"</span>  <span class="attr">bookPrice</span>=<span class="string">"25.00"</span>&gt;</span></span><br><span class="line">    this is a book</span><br><span class="line"><span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面book元素开始标签内的<strong>bokName</strong>和<strong>bookPrice</strong>就是属性，表示book的一些附加信息，当然这些信息也可以在<strong>子元素</strong>中描述。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/04/03/android/android-1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2015/10/05/ueditor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -585,7 +610,7 @@
 
       
           <h1 id="百度编辑器服务端整合"><a href="#百度编辑器服务端整合" class="headerlink" title="百度编辑器服务端整合"></a>百度编辑器服务端整合</h1><p>基于Spring MVC的项目中使用百度编辑器，记录备忘。</p>
-<h1 id="服务端代码："><a href="#服务端代码：" class="headerlink" title="服务端代码："></a>服务端代码：</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化百度编辑器，可传入其他参数生成不同的编辑器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/ueditor/init"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initUeditor</span><span class="params">(HttpServletResponse response,HttpServletRequest request)</span></span>&#123;</span><br><span class="line">        response.setContentType(<span class="string">"application/json"</span>);</span><br><span class="line">        <span class="comment">//配置路径，首先获取webpp根目录绝对路径</span></span><br><span class="line">        String rootPath = request.getSession().getServletContext().getRealPath(<span class="string">"/"</span>);</span><br><span class="line">		<span class="comment">//将config.json放到与ueditor.config.js同一级的目录下。将ueditor所有文件放入到wapapp-static-ueditor下</span></span><br><span class="line">		<span class="comment">//设置获取服务端配置文件地址修正路径，此路径同时作用于文件上传</span></span><br><span class="line">        rootPath=rootPath+<span class="string">"static"</span>;</span><br><span class="line">        PrintWriter writer=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String exec = <span class="keyword">new</span> ActionEnter(request, rootPath).exec();</span><br><span class="line">            writer = response.getWriter();</span><br><span class="line">            writer.write(exec);</span><br><span class="line">            writer.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            logger.error(<span class="string">"百度编辑器初始化错误！"</span>,e);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(writer!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                writer.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="服务端代码："><a href="#服务端代码：" class="headerlink" title="服务端代码："></a>服务端代码：</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化百度编辑器，可传入其他参数生成不同的编辑器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/ueditor/init&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initUeditor</span><span class="params">(HttpServletResponse response,HttpServletRequest request)</span></span>&#123;</span><br><span class="line">        response.setContentType(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">        <span class="comment">//配置路径，首先获取webpp根目录绝对路径</span></span><br><span class="line">        String rootPath = request.getSession().getServletContext().getRealPath(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">		<span class="comment">//将config.json放到与ueditor.config.js同一级的目录下。将ueditor所有文件放入到wapapp-static-ueditor下</span></span><br><span class="line">		<span class="comment">//设置获取服务端配置文件地址修正路径，此路径同时作用于文件上传</span></span><br><span class="line">        rootPath=rootPath+<span class="string">&quot;static&quot;</span>;</span><br><span class="line">        PrintWriter writer=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String exec = <span class="keyword">new</span> ActionEnter(request, rootPath).exec();</span><br><span class="line">            writer = response.getWriter();</span><br><span class="line">            writer.write(exec);</span><br><span class="line">            writer.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            logger.error(<span class="string">&quot;百度编辑器初始化错误！&quot;</span>,e);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(writer!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                writer.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2015/10/05/ueditor/#more" rel="contents">
@@ -837,7 +862,7 @@
           <h2 id="MySQL存储过程和调度简单示例"><a href="#MySQL存储过程和调度简单示例" class="headerlink" title="MySQL存储过程和调度简单示例"></a>MySQL存储过程和调度简单示例</h2><h3 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h3><blockquote>
 <p>一个简单的存储过程示例        </p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> <span class="keyword">test</span>;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> sp_switch_group_trade;</span><br><span class="line"><span class="comment">-- 声明结束标记，防止遇到;就结束</span></span><br><span class="line">DELIMITER //;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> sp_switch_group_trade () </span><br><span class="line"><span class="comment">-- 作者：杨龙</span></span><br><span class="line"><span class="comment">-- 功能：将blog分表中的行业转换到主表中</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="comment">-- 变量申明</span></span><br><span class="line">  <span class="keyword">DECLARE</span> v_trade <span class="built_in">VARCHAR</span> (<span class="number">20</span>) ;</span><br><span class="line">  <span class="keyword">DECLARE</span> v_id <span class="built_in">BIGINT</span> ;</span><br><span class="line">  <span class="keyword">DECLARE</span> end_flag <span class="built_in">BOOLEAN</span> <span class="keyword">DEFAULT</span> <span class="literal">FALSE</span> ;</span><br><span class="line">  <span class="comment">-- 游标查询转换分表中的行业</span></span><br><span class="line">  <span class="keyword">DECLARE</span> cur <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> </span><br><span class="line">  <span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">      t.trade_id </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">'100100'</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">'1'</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">'100101'</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">'2'</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">'100102'</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">'3'</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">'100103'</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">'4'</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">'100104'</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">'5'</span> </span><br><span class="line">      <span class="keyword">ELSE</span> <span class="string">'0'</span> </span><br><span class="line">    <span class="keyword">END</span> trade,</span><br><span class="line">    t.id </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    industry t </span><br><span class="line">  <span class="keyword">WHERE</span>  </span><br><span class="line">    t.status = <span class="string">'1'</span> ;</span><br><span class="line">  <span class="comment">-- 游标标记</span></span><br><span class="line">  <span class="keyword">DECLARE</span> CONTINUE <span class="keyword">HANDLER</span> <span class="keyword">FOR</span> <span class="keyword">NOT</span> <span class="keyword">FOUND</span> <span class="keyword">SET</span> end_flag = <span class="literal">TRUE</span> ;</span><br><span class="line">  <span class="comment">--打开游标，开始逐行读取</span></span><br><span class="line">  OPEN cur ;</span><br><span class="line">    read_loop : LOOP</span><br><span class="line">      <span class="comment">-- 获取游标数据</span></span><br><span class="line">      FETCH cur INTO v_trade,v_id;</span><br><span class="line">      <span class="comment">-- 循环跳出判断</span></span><br><span class="line">      IF end_flag </span><br><span class="line">        THEN LEAVE read_loop;</span><br><span class="line">      <span class="keyword">END</span> <span class="keyword">IF</span> ;</span><br><span class="line">      <span class="comment">-- 操作执行语句块</span></span><br><span class="line">      <span class="keyword">UPDATE</span> </span><br><span class="line">        main_trade </span><br><span class="line">      <span class="keyword">SET</span></span><br><span class="line">        trade = v_trade </span><br><span class="line">      <span class="keyword">WHERE</span> <span class="keyword">group_id</span> = v_id ;</span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">LOOP</span> ;</span><br><span class="line">  CLOSE cur ;</span><br><span class="line"><span class="keyword">END</span> ;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">USE test;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> IF <span class="keyword">EXISTS</span> sp_switch_group_trade;</span><br><span class="line"><span class="comment">-- 声明结束标记，防止遇到;就结束</span></span><br><span class="line">DELIMITER <span class="operator">/</span><span class="operator">/</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> sp_switch_group_trade () </span><br><span class="line"><span class="comment">-- 作者：杨龙</span></span><br><span class="line"><span class="comment">-- 功能：将blog分表中的行业转换到主表中</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">  <span class="comment">-- 变量申明</span></span><br><span class="line">  <span class="keyword">DECLARE</span> v_trade <span class="type">VARCHAR</span> (<span class="number">20</span>) ;</span><br><span class="line">  <span class="keyword">DECLARE</span> v_id <span class="type">BIGINT</span> ;</span><br><span class="line">  <span class="keyword">DECLARE</span> end_flag <span class="type">BOOLEAN</span> <span class="keyword">DEFAULT</span> <span class="literal">FALSE</span> ;</span><br><span class="line">  <span class="comment">-- 游标查询转换分表中的行业</span></span><br><span class="line">  <span class="keyword">DECLARE</span> cur <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> </span><br><span class="line">  <span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">      t.trade_id </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">&#x27;100100&#x27;</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">&#x27;1&#x27;</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">&#x27;100101&#x27;</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">&#x27;2&#x27;</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">&#x27;100102&#x27;</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">&#x27;3&#x27;</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">&#x27;100103&#x27;</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">&#x27;4&#x27;</span> </span><br><span class="line">      <span class="keyword">WHEN</span> <span class="string">&#x27;100104&#x27;</span> </span><br><span class="line">      <span class="keyword">THEN</span> <span class="string">&#x27;5&#x27;</span> </span><br><span class="line">      <span class="keyword">ELSE</span> <span class="string">&#x27;0&#x27;</span> </span><br><span class="line">    <span class="keyword">END</span> trade,</span><br><span class="line">    t.id </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    industry t </span><br><span class="line">  <span class="keyword">WHERE</span>  </span><br><span class="line">    t.status <span class="operator">=</span> <span class="string">&#x27;1&#x27;</span> ;</span><br><span class="line">  <span class="comment">-- 游标标记</span></span><br><span class="line">  <span class="keyword">DECLARE</span> CONTINUE HANDLER <span class="keyword">FOR</span> <span class="keyword">NOT</span> FOUND <span class="keyword">SET</span> end_flag <span class="operator">=</span> <span class="literal">TRUE</span> ;</span><br><span class="line">  <span class="comment">--打开游标，开始逐行读取</span></span><br><span class="line">  <span class="keyword">OPEN</span> cur ;</span><br><span class="line">    read_loop : LOOP</span><br><span class="line">      <span class="comment">-- 获取游标数据</span></span><br><span class="line">      <span class="keyword">FETCH</span> cur <span class="keyword">INTO</span> v_trade,v_id;</span><br><span class="line">      <span class="comment">-- 循环跳出判断</span></span><br><span class="line">      IF end_flag </span><br><span class="line">        <span class="keyword">THEN</span> LEAVE read_loop;</span><br><span class="line">      <span class="keyword">END</span> IF ;</span><br><span class="line">      <span class="comment">-- 操作执行语句块</span></span><br><span class="line">      UPDATE </span><br><span class="line">        main_trade </span><br><span class="line">      <span class="keyword">SET</span></span><br><span class="line">        trade <span class="operator">=</span> v_trade </span><br><span class="line">      <span class="keyword">WHERE</span> group_id <span class="operator">=</span> v_id ;</span><br><span class="line">    <span class="keyword">END</span> LOOP ;</span><br><span class="line">  <span class="keyword">CLOSE</span> cur ;</span><br><span class="line"><span class="keyword">END</span> ;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2015/08/13/MySQL-Procedure/#more" rel="contents">
@@ -1047,7 +1072,7 @@
 
       
           <p>#Shiro在集群环境下会丢失session解决<br>Shiro在集群时可能会选择Redis，ehcache，membercache等作为集群缓存，存放登陆认证的信息，有时候会存在丢失session的情况，通过分析，shiro自己实现了一个session，如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleSession</span> <span class="keyword">implements</span> <span class="title">ValidatingSession</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serialization reminder:</span></span><br><span class="line">    <span class="comment">// You _MUST_ change this number if you introduce a change to this class</span></span><br><span class="line">    <span class="comment">// that is NOT serialization backwards compatible.  Serialization-compatible</span></span><br><span class="line">    <span class="comment">// changes do not require a change to this number.  If you need to generate</span></span><br><span class="line">    <span class="comment">// a new number in this case, use the JDK's 'serialver' program to generate it.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">7125642695178165650L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//TODO - complete JavaDoc</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(SimpleSession<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> MILLIS_PER_SECOND = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> MILLIS_PER_MINUTE = <span class="number">60</span> * MILLIS_PER_SECOND;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> MILLIS_PER_HOUR = <span class="number">60</span> * MILLIS_PER_MINUTE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//serialization bitmask fields. DO NOT CHANGE THE ORDER THEY ARE DECLARED!</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> bitIndexCounter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> START_TIMESTAMP_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STOP_TIMESTAMP_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> LAST_ACCESS_TIME_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIMEOUT_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXPIRED_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HOST_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ATTRIBUTES_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Serializable id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Date startTimestamp;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Date stopTimestamp;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Date lastAccessTime;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">long</span> timeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">boolean</span> expired;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> String host;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Map&lt;Object, Object&gt; attributes;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleSession</span> <span class="keyword">implements</span> <span class="title">ValidatingSession</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Serialization reminder:</span></span><br><span class="line">    <span class="comment">// You _MUST_ change this number if you introduce a change to this class</span></span><br><span class="line">    <span class="comment">// that is NOT serialization backwards compatible.  Serialization-compatible</span></span><br><span class="line">    <span class="comment">// changes do not require a change to this number.  If you need to generate</span></span><br><span class="line">    <span class="comment">// a new number in this case, use the JDK&#x27;s &#x27;serialver&#x27; program to generate it.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">7125642695178165650L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//TODO - complete JavaDoc</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(SimpleSession.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> MILLIS_PER_SECOND = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> MILLIS_PER_MINUTE = <span class="number">60</span> * MILLIS_PER_SECOND;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> MILLIS_PER_HOUR = <span class="number">60</span> * MILLIS_PER_MINUTE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//serialization bitmask fields. DO NOT CHANGE THE ORDER THEY ARE DECLARED!</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> bitIndexCounter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ID_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> START_TIMESTAMP_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STOP_TIMESTAMP_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> LAST_ACCESS_TIME_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIMEOUT_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXPIRED_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HOST_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ATTRIBUTES_BIT_MASK = <span class="number">1</span> &lt;&lt; bitIndexCounter++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Serializable id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Date startTimestamp;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Date stopTimestamp;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Date lastAccessTime;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">long</span> timeout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">boolean</span> expired;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> String host;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Map&lt;Object, Object&gt; attributes;</span><br></pre></td></tr></table></figure>
 
 <p>可以看到，很多属性是<strong>transient</strong>修饰的，也就是说，当我们不使用JDK原生序列化机制时，这些属性不会被序列化，特别是源码注释也说明了这一点，而我们使用的序列化器往往考虑到性能，使用的是ASM或反射机制来实现的序列化，因而在没有是否序列化transient属性的设置时，往往默认不序列化，例如Kryo，已经是一个定死的属性，不序列化transient属性。<br>那么解决的方式也很简单：</p>
 <ol>
@@ -1223,6 +1248,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

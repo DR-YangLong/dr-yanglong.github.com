@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="首先安装node js安装npm可以省略，最新版的node已经集成首先进入某个目录，此例子为D:\安装hexo1D:\&gt;npm install hexo-cli -g  ###初始化博客 1D:\&gt;hexo init blog ###进入blog并安装 12D:\&gt;cd blogD:\blog&gt;npm install">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2015/06/05/hexo-guide/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="首先安装node js安装npm可以省略，最新版的node已经集成首先进入某个目录，此例子为D:\安装hexo1D:\&gt;npm install hexo-cli -g  ###初始化博客 1D:\&gt;hexo init blog ###进入blog并安装 12D:\&gt;cd blogD:\blog&gt;npm install">
+<meta property="og:locale">
 <meta property="article:published_time" content="2015-06-05T09:40:56.000Z">
 <meta property="article:modified_time" content="2018-10-17T01:15:15.073Z">
 <meta property="article:author" content="YangLong">
@@ -106,6 +107,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -135,11 +137,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -222,7 +251,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;hexo init blog</span><br></pre></td></tr></table></figure>
 <p>###进入blog并安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;<span class="built_in">cd</span> blog</span><br><span class="line">D:\blog&gt;npm install</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<span id="more"></span>
 <p>###启动服务器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\blog&gt;hexo server</span><br></pre></td></tr></table></figure>
 <p>###到这一步，如果，没有错误，则人博客安装成功，在浏览器输入</p>
@@ -233,7 +262,7 @@
 <p>询问是否输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y</span><br></pre></td></tr></table></figure>
 <p>终止服务器</p>
-<p>hexo有很多的开源主题，可以自己搜索一个，这里用一个小清新的主题<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener" title="hexo主题">yilia</a></p>
+<p>hexo有很多的开源主题，可以自己搜索一个，这里用一个小清新的主题<a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia" title="hexo主题">yilia</a></p>
 <h3 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">浏览器打开 https://github.com/litten/hexo-theme-yilia/archive/master.zip 进行下载</span><br></pre></td></tr></table></figure>
 <h3 id="设置主题"><a href="#设置主题" class="headerlink" title="设置主题"></a>设置主题</h3><p>将下载到的zip选择解压到当前目录，并改变文件夹名称为yilia<br>将yilia移动到D:\blog\themes文件夹下<br>打开D:\blog_config.yml文件找到</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: landscape</span><br></pre></td></tr></table></figure>
@@ -244,8 +273,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\blog&gt;hexo server</span><br></pre></td></tr></table></figure>
 <p>重启服务器，访问 127.0.0.1:4000 查看主题已经改变</p>
 <h2 id="部署安装到github"><a href="#部署安装到github" class="headerlink" title="部署安装到github"></a>部署安装到github</h2><h3 id="前驱条件"><a href="#前驱条件" class="headerlink" title="前驱条件"></a>前驱条件</h3><ol>
-<li>首先到<a href="https://github.com/" target="_blank" rel="noopener" title="gitHub">github</a>注册账号，并新建一个仓库（具体步骤略），需要注意仓库的名称就是 yourAccountName.github.io,页面不要关闭，本例仓库：dr-yanglong.github.com</li>
-<li>安装<a href="http://git-scm.com/downloads" target="_blank" rel="noopener" title="git">git</a>,并生成SSH key，具体步骤参照<a href="http://git.oschina.net/wzw/git-quick-start" target="_blank" rel="noopener">git 入门</a>，测试能够完全访问到github</li>
+<li>首先到<a target="_blank" rel="noopener" href="https://github.com/" title="gitHub">github</a>注册账号，并新建一个仓库（具体步骤略），需要注意仓库的名称就是 yourAccountName.github.io,页面不要关闭，本例仓库：dr-yanglong.github.com</li>
+<li>安装<a target="_blank" rel="noopener" href="http://git-scm.com/downloads" title="git">git</a>,并生成SSH key，具体步骤参照<a target="_blank" rel="noopener" href="http://git.oschina.net/wzw/git-quick-start">git 入门</a>，测试能够完全访问到github</li>
 </ol>
 <h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><p>在D:\blog下面右键，选择</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git Init Here</span><br></pre></td></tr></table></figure>
@@ -253,7 +282,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git Bash</span><br></pre></td></tr></table></figure>
 <p>在弹出CMD命令窗口稳定后，输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>接着用编辑器（记事本/下载<a href="http://www.sublimetext.com/2" target="_blank" rel="noopener">sublime</a>）打开</p>
+<p>接着用编辑器（记事本/下载<a target="_blank" rel="noopener" href="http://www.sublimetext.com/2">sublime</a>）打开</p>
 <blockquote>
 <p>_config.yml</p>
 </blockquote>
@@ -275,8 +304,8 @@
 <blockquote>
 <p> Your site is published at <a href="http://dr-yanglong.github.io">http://dr-yanglong.github.io</a>. </p>
 </blockquote>
-<p>那么，你的博客就弄好了，接下来就是改一些名称，图片之类的。怎么改可以参照<a href="http://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo官网</a>全中文，相信没压力。</p>
-<h2 id="下面是一些命令"><a href="#下面是一些命令" class="headerlink" title="下面是一些命令"></a>下面是一些命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"postName"</span> <span class="comment">#新建文章</span></span><br><span class="line">hexo new page <span class="string">"pageName"</span> <span class="comment">#新建页面</span></span><br><span class="line">hexo generate <span class="comment">#生成静态页面至public目录</span></span><br><span class="line">hexo server <span class="comment">#开启预览访问端口（默认端口4000，'ctrl + c'关闭server）</span></span><br><span class="line">hexo deploy <span class="comment">#将.deploy目录部署到GitHub</span></span><br><span class="line">hexo <span class="built_in">help</span>  <span class="comment"># 查看帮助</span></span><br><span class="line">hexo version  <span class="comment">#查看Hexo的版本</span></span><br><span class="line"></span><br><span class="line">hexo deploy -g  <span class="comment">#生成加部署==hexo d -g</span></span><br><span class="line">hexo server -g  <span class="comment">#生成加预览==hexo s -g</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#简写</span></span><br><span class="line">hexo n == hexo new</span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure>
+<p>那么，你的博客就弄好了，接下来就是改一些名称，图片之类的。怎么改可以参照<a target="_blank" rel="noopener" href="http://hexo.io/zh-cn/">Hexo官网</a>全中文，相信没压力。</p>
+<h2 id="下面是一些命令"><a href="#下面是一些命令" class="headerlink" title="下面是一些命令"></a>下面是一些命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;postName&quot;</span> <span class="comment">#新建文章</span></span><br><span class="line">hexo new page <span class="string">&quot;pageName&quot;</span> <span class="comment">#新建页面</span></span><br><span class="line">hexo generate <span class="comment">#生成静态页面至public目录</span></span><br><span class="line">hexo server <span class="comment">#开启预览访问端口（默认端口4000，&#x27;ctrl + c&#x27;关闭server）</span></span><br><span class="line">hexo deploy <span class="comment">#将.deploy目录部署到GitHub</span></span><br><span class="line">hexo <span class="built_in">help</span>  <span class="comment"># 查看帮助</span></span><br><span class="line">hexo version  <span class="comment">#查看Hexo的版本</span></span><br><span class="line"></span><br><span class="line">hexo deploy -g  <span class="comment">#生成加部署==hexo d -g</span></span><br><span class="line">hexo server -g  <span class="comment">#生成加预览==hexo s -g</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#简写</span></span><br><span class="line">hexo n == hexo new</span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -361,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先安装node-js"><span class="nav-number">1.</span> <span class="nav-text">首先安装node js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装npm可以省略，最新版的node已经集成"><span class="nav-number">2.</span> <span class="nav-text">安装npm可以省略，最新版的node已经集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先进入某个目录，此例子为D"><span class="nav-number">2.1.</span> <span class="nav-text">首先进入某个目录，此例子为D:\</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">3.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置使用自己喜欢的主题"><span class="nav-number">4.</span> <span class="nav-text">设置使用自己喜欢的主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载主题"><span class="nav-number">4.1.</span> <span class="nav-text">下载主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置主题"><span class="nav-number">4.2.</span> <span class="nav-text">设置主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署安装到github"><span class="nav-number">5.</span> <span class="nav-text">部署安装到github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前驱条件"><span class="nav-number">5.1.</span> <span class="nav-text">前驱条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到github"><span class="nav-number">5.2.</span> <span class="nav-text">部署到github</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行命令部署到github"><span class="nav-number">5.2.1.</span> <span class="nav-text">执行命令部署到github</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面是一些命令"><span class="nav-number">6.</span> <span class="nav-text">下面是一些命令</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85node-js"><span class="nav-number">1.</span> <span class="nav-text">首先安装node js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85npm%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%EF%BC%8C%E6%9C%80%E6%96%B0%E7%89%88%E7%9A%84node%E5%B7%B2%E7%BB%8F%E9%9B%86%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">安装npm可以省略，最新版的node已经集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E8%BF%9B%E5%85%A5%E6%9F%90%E4%B8%AA%E7%9B%AE%E5%BD%95%EF%BC%8C%E6%AD%A4%E4%BE%8B%E5%AD%90%E4%B8%BAD"><span class="nav-number">2.1.</span> <span class="nav-text">首先进入某个目录，此例子为D:\</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo"><span class="nav-number">3.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E5%96%9C%E6%AC%A2%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">设置使用自己喜欢的主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%BB%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">下载主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">设置主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%88%B0github"><span class="nav-number">5.</span> <span class="nav-text">部署安装到github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E9%A9%B1%E6%9D%A1%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">前驱条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0github"><span class="nav-number">5.2.</span> <span class="nav-text">部署到github</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E9%83%A8%E7%BD%B2%E5%88%B0github"><span class="nav-number">5.2.1.</span> <span class="nav-text">执行命令部署到github</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">下面是一些命令</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -460,6 +489,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

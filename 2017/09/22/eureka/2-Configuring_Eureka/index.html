@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="配置Eureka阅读简介以更好的理解设置的概念。         Eureka共有2个组件-Eureka Client和Eureka Server。在使用Eureka时，你的架构中通常有2个应用：  Application Client通过Eureka Client请求应用服务端。 Application Server接受客户端的请求并发送响应。  设置涉及以下内容：  Eureka Server">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2017/09/22/eureka/2-Configuring_Eureka/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="配置Eureka阅读简介以更好的理解设置的概念。         Eureka共有2个组件-Eureka Client和Eureka Server。在使用Eureka时，你的架构中通常有2个应用：  Application Client通过Eureka Client请求应用服务端。 Application Server接受客户端的请求并发送响应。  设置涉及以下内容：  Eureka Server">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-09-22T11:40:00.000Z">
 <meta property="article:modified_time" content="2018-10-17T02:23:07.837Z">
 <meta property="article:author" content="YangLong">
@@ -104,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -133,11 +135,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -230,35 +259,35 @@
 <blockquote>
 <p>如果在云环境中运行，则需要传入java commandline属性-Deureka.datacenter=cloud，以便Eureka客户端/服务器知道如何初始化AWS云的特定信息。</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="配置Eureka-Client"><a href="#配置Eureka-Client" class="headerlink" title="配置Eureka Client"></a>配置Eureka Client</h2><h3 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h3><ul>
 <li><p>JDK 1.8或更高<br>你能够通过以下方式获得Eureka Client程序。请优先选择最高的release版本，因为它有更多的修复。</p>
 </li>
-<li><p>你能够通过<a href="http://search.maven.org/#search%7Cga%7C1%7Ceureka-client" target="_blank" rel="noopener">http://search.maven.org/#search%7Cga%7C1%7Ceureka-client</a>下载。</p>
+<li><p>你能够通过<a target="_blank" rel="noopener" href="http://search.maven.org/#search%7Cga%7C1%7Ceureka-client">http://search.maven.org/#search%7Cga%7C1%7Ceureka-client</a>下载。</p>
 </li>
 <li><p>可以通过在依赖文件中添加依赖</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.netflix.eureka<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>可以参照<a href="https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server" target="_blank" rel="noopener">https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server</a>进行手动构建。</p>
+<li><p>可以参照<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server">https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server</a>进行手动构建。</p>
 </li>
 </ul>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>配置Eureka Client最简单的方式是使用配置文件。默认情况下，Eureka Client会在<em>classpath</em> 路径下搜索 * eureka-client.properties* 配置文件。进一步的，它会搜索特定环境下的特定配置文件，并覆盖相关配置。环境通常为 <em>test</em> 或者 <em>prod</em> ，这是通过java commandline <em>-Deureka.environment*传给eureka client的（值并没有 *.properties</em> 后缀）。因此，客户端还会搜索 <em>eureka-client-{test,prod}.properties</em> 文件。     </p>
-<p>你可以在<a href="https://github.com/Netflix/eureka/blob/master/eureka-examples/conf/sample-eureka-client.properties" target="_blank" rel="noopener">https://github.com/Netflix/eureka/blob/master/eureka-examples/conf/sample-eureka-client.properties</a>查看默认配置。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">###Eureka Client configuration for Sample Eureka Client</span><br><span class="line"></span><br><span class="line"># see the README in eureka-examples to see an overview of the example set up</span><br><span class="line"></span><br><span class="line"># note that for a purely client usage (e.g. only used to get information about other services,</span><br><span class="line"># there is no need for registration. This property applies to the singleton DiscoveryClient so</span><br><span class="line"># if you run a server that is both a service provider and also a service consumer,</span><br><span class="line"># then don&#39;t set this property to false.</span><br><span class="line">eureka.registration.enabled&#x3D;false</span><br><span class="line"></span><br><span class="line">## configuration related to reaching the eureka servers</span><br><span class="line">eureka.preferSameZone&#x3D;true</span><br><span class="line">eureka.shouldUseDns&#x3D;false</span><br><span class="line">eureka.serviceUrl.default&#x3D;http:&#x2F;&#x2F;localhost:8080&#x2F;eureka&#x2F;v2&#x2F;</span><br><span class="line"></span><br><span class="line">eureka.decoderName&#x3D;JacksonJson</span><br></pre></td></tr></table></figure>
+<p>你可以在<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/blob/master/eureka-examples/conf/sample-eureka-client.properties">https://github.com/Netflix/eureka/blob/master/eureka-examples/conf/sample-eureka-client.properties</a>查看默认配置。如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">###Eureka Client configuration for Sample Eureka Client</span><br><span class="line"></span><br><span class="line"># see the README in eureka-examples to see an overview of the example set up</span><br><span class="line"></span><br><span class="line"># note that for a purely client usage (e.g. only used to get information about other services,</span><br><span class="line"># there is no need for registration. This property applies to the singleton DiscoveryClient so</span><br><span class="line"># if you run a server that is both a service provider and also a service consumer,</span><br><span class="line"># then don&#x27;t set this property to false.</span><br><span class="line">eureka.registration.enabled=false</span><br><span class="line"></span><br><span class="line">## configuration related to reaching the eureka servers</span><br><span class="line">eureka.preferSameZone=true</span><br><span class="line">eureka.shouldUseDns=false</span><br><span class="line">eureka.serviceUrl.default=http://localhost:8080/eureka/v2/</span><br><span class="line"></span><br><span class="line">eureka.decoderName=JacksonJson</span><br></pre></td></tr></table></figure>
 
 <p>你可以复制并按你自己的需要编辑这些配置，然后将它们放到你项目的class path。如果你因为某些原因改变了自定义配置文件的名称，你可以通过在java commondline中指定 <em>-Deureka.client.props={配置文件名}</em>（文件名不带后缀） 来搜索并启用你修改名称后的配置文件。      </p>
 <p>配置文件中解释了各个配置项的作用。最小的必须配置项为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Application Name (eureka.name)</span><br><span class="line">Application Port (eureka.port)</span><br><span class="line">Virtual HostName (eureka.vipAddress)</span><br><span class="line">Eureka Service Urls (eureka.serviceUrls)</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Application Name (eureka.name)</span><br><span class="line">Application Port (eureka.port)</span><br><span class="line">Virtual HostName (eureka.vipAddress)</span><br><span class="line">Eureka Service Urls (eureka.serviceUrls)</span><br></pre></td></tr></table></figure>
 
-<p>更多的配置项，通过查看&lt;<a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/EurekaInstanceConfig.java" target="_blank" rel="noopener">https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/EurekaInstanceConfig.java</a> <a href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/EurekaClientConfig.java&gt;可以获得。" target="_blank" rel="noopener">https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/EurekaClientConfig.java&gt;可以获得。</a></p>
+<p>更多的配置项，通过查看&lt;<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/EurekaInstanceConfig.java">https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/appinfo/EurekaInstanceConfig.java</a> <a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/EurekaClientConfig.java&gt;可以获得。">https://github.com/Netflix/eureka/blob/master/eureka-client/src/main/java/com/netflix/discovery/EurekaClientConfig.java&gt;可以获得。</a></p>
 <h2 id="配置Eureka-Server"><a href="#配置Eureka-Server" class="headerlink" title="配置Eureka Server"></a>配置Eureka Server</h2><h3 id="先决条件-1"><a href="#先决条件-1" class="headerlink" title="先决条件"></a>先决条件</h3><ul>
 <li>JDK 1.8或更高</li>
 <li>Tomcat 6.0.10或更高</li>
 </ul>
 <p>你可以选择以下方式获取Eureka Server程序：</p>
 <ul>
-<li>参照<a href="https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server" target="_blank" rel="noopener">https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server</a>手动编译WAR包。</li>
-<li>使用<a href="http://search.maven.org/#search%7Cga%7C1%7Ceureka-server" target="_blank" rel="noopener">http://search.maven.org/#search%7Cga%7C1%7Ceureka-server</a>从MAVEN中央仓库直接下载WAR包。</li>
+<li>参照<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server">https://github.com/Netflix/eureka/wiki/Building-Eureka-Client-and-Server</a>手动编译WAR包。</li>
+<li>使用<a target="_blank" rel="noopener" href="http://search.maven.org/#search%7Cga%7C1%7Ceureka-server">http://search.maven.org/#search%7Cga%7C1%7Ceureka-server</a>从MAVEN中央仓库直接下载WAR包。</li>
 </ul>
 <h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><p>Eureka Server有2个配置：</p>
 <ul>
@@ -271,7 +300,7 @@
 <blockquote>
 <p>eureka.numberRegistrySyncRetries=0</p>
 </blockquote>
-<h4 id="AWS配置"><a href="#AWS配置" class="headerlink" title="AWS配置"></a>AWS配置</h4><p>如果你运行在AWS中，按照<a href="https://github.com/Netflix/eureka/wiki/Deploying-Eureka-Servers-in-EC2" target="_blank" rel="noopener">https://github.com/Netflix/eureka/wiki/Deploying-Eureka-Servers-in-EC2</a>处的说明，需要一些额外的配置。其他高级配置，可以参照此处<a href="https://github.com/Netflix/eureka/blob/master/eureka-core/src/main/java/com/netflix/eureka/EurekaServerConfig.java" target="_blank" rel="noopener">https://github.com/Netflix/eureka/blob/master/eureka-core/src/main/java/com/netflix/eureka/EurekaServerConfig.java</a>。    </p>
+<h4 id="AWS配置"><a href="#AWS配置" class="headerlink" title="AWS配置"></a>AWS配置</h4><p>如果你运行在AWS中，按照<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/wiki/Deploying-Eureka-Servers-in-EC2">https://github.com/Netflix/eureka/wiki/Deploying-Eureka-Servers-in-EC2</a>处的说明，需要一些额外的配置。其他高级配置，可以参照此处<a target="_blank" rel="noopener" href="https://github.com/Netflix/eureka/blob/master/eureka-core/src/main/java/com/netflix/eureka/EurekaServerConfig.java">https://github.com/Netflix/eureka/blob/master/eureka-core/src/main/java/com/netflix/eureka/EurekaServerConfig.java</a>。    </p>
 <p>如果你是手动构建WAR包，你可以编辑 <em>eureka-server/conf</em> 目录下的配置文件，这样构建之前文件将会存放到 WEB-INF/classes 目录下。</p>
 <p>如果你下载了WAR包，你可以自行修改包中的 WEB-INF/classes 目录下的配置文件。</p>
 <p>运行一个demo应用可以帮助你很好的理解配置属性。</p>
@@ -359,7 +388,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Eureka"><span class="nav-number">1.</span> <span class="nav-text">配置Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Eureka-Client"><span class="nav-number">1.1.</span> <span class="nav-text">配置Eureka Client</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先决条件"><span class="nav-number">1.1.1.</span> <span class="nav-text">先决条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.1.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Eureka-Server"><span class="nav-number">1.2.</span> <span class="nav-text">配置Eureka Server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先决条件-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">先决条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本地开发配置"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">本地开发配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AWS配置"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">AWS配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本兼容性"><span class="nav-number">1.3.</span> <span class="nav-text">版本兼容性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEEureka"><span class="nav-number">1.</span> <span class="nav-text">配置Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEEureka-Client"><span class="nav-number">1.1.</span> <span class="nav-text">配置Eureka Client</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">先决条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEEureka-Server"><span class="nav-number">1.2.</span> <span class="nav-text">配置Eureka Server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">先决条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">本地开发配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AWS%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">AWS配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">版本兼容性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -458,6 +487,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

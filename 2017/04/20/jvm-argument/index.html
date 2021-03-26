@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="通用参数   参数 含义 默认值 说明    -server 启用server模式 – 启用server模式启动时较慢，编译将在启动时完成，在运行时能获得更好的性能   -client 启用client模式 – 启用client模式，jvm不会对编译阶段优化，启动较快，运行时性能较低   -Xms 初始堆大小 物理内存的1&#x2F;64(&lt;1GB&gt;) 默认空余堆内存小于40%时（通过MinHe">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2017/04/20/jvm-argument/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="通用参数   参数 含义 默认值 说明    -server 启用server模式 – 启用server模式启动时较慢，编译将在启动时完成，在运行时能获得更好的性能   -client 启用client模式 – 启用client模式，jvm不会对编译阶段优化，启动较快，运行时性能较低   -Xms 初始堆大小 物理内存的1&#x2F;64(&lt;1GB&gt;) 默认空余堆内存小于40%时（通过MinHe">
+<meta property="og:locale">
 <meta property="article:published_time" content="2017-04-20T12:09:56.000Z">
 <meta property="article:modified_time" content="2019-01-01T02:00:21.950Z">
 <meta property="article:author" content="YangLong">
@@ -104,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -133,11 +135,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -356,7 +385,7 @@
 <td align="center">–</td>
 </tr>
 </tbody></table>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="辅助信息参数"><a href="#辅助信息参数" class="headerlink" title="辅助信息参数"></a>辅助信息参数</h2><table>
 <thead>
 <tr>
@@ -436,7 +465,7 @@
 <blockquote>
 <p>GC日志分析</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> [GC (Allocation Failure) 13817.377: [ParNew: 587356K-&gt;21969K(652288K), 0.0280778 secs] 815480K-&gt;250094K(1479680K), 0.0281542 secs] [Times: user&#x3D;0.06 sys&#x3D;0.00, real&#x3D;0.03 secs] </span><br><span class="line">GC (Allocation Failure) ：引起GC的原因。</span><br><span class="line">[ParNew: 587356K-&gt;21969K(652288K), 0.0280778 secs]：GC的类型，ParNew为新生代垃圾收集器，说明是Minor GC，587356K为GC前新生代内存使用量，21969K为GC后新生代内存使用用，(652288K)为新生代总内存大小。</span><br><span class="line">815480K-&gt;250094K(1479680K)：815480K为Minor GC前堆内存总使用量，250094K为GC后堆内存总是用量，(1479680K)为堆总内存大小。</span><br><span class="line">时间为GC耗时。</span><br><span class="line">[Times: user&#x3D;0.06 sys&#x3D;0.00, real&#x3D;0.03 secs]：user为程序耗时，是参与GC的所有cpu（cpu核心）耗时总和，sys为系统（内核）耗时，real为GC真正耗时</span><br><span class="line"></span><br><span class="line">[Full GC (System.gc()) 13952.460: [CMS: 228124K-&gt;185622K(827392K), 1.9256164 secs] 350869K-&gt;185622K(1479680K), [Metaspace: 313411K-&gt;313411K(557056K)], 1.9271636 secs] [Times: user&#x3D;0.91 sys&#x3D;0.97, real&#x3D;1.93 secs] </span><br><span class="line">使用System.gc()进行FullGC，年老代使用CMS垃圾收集器，GC前年老代使用内存为228124K，GC后使用185622K，年老代总内存827392K，整个堆GC前使用350869K，GC后使用185622K，总共内存为1479680K，Metaspace GC前使用313411K，GC后使用313411K，整个Metaspace内存大小为557056K。</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> [GC (Allocation Failure) 13817.377: [ParNew: 587356K-&gt;21969K(652288K), 0.0280778 secs] 815480K-&gt;250094K(1479680K), 0.0281542 secs] [Times: user=0.06 sys=0.00, real=0.03 secs] </span><br><span class="line">GC (Allocation Failure) ：引起GC的原因。</span><br><span class="line">[ParNew: 587356K-&gt;21969K(652288K), 0.0280778 secs]：GC的类型，ParNew为新生代垃圾收集器，说明是Minor GC，587356K为GC前新生代内存使用量，21969K为GC后新生代内存使用用，(652288K)为新生代总内存大小。</span><br><span class="line">815480K-&gt;250094K(1479680K)：815480K为Minor GC前堆内存总使用量，250094K为GC后堆内存总是用量，(1479680K)为堆总内存大小。</span><br><span class="line">时间为GC耗时。</span><br><span class="line">[Times: user=0.06 sys=0.00, real=0.03 secs]：user为程序耗时，是参与GC的所有cpu（cpu核心）耗时总和，sys为系统（内核）耗时，real为GC真正耗时</span><br><span class="line"></span><br><span class="line">[Full GC (System.gc()) 13952.460: [CMS: 228124K-&gt;185622K(827392K), 1.9256164 secs] 350869K-&gt;185622K(1479680K), [Metaspace: 313411K-&gt;313411K(557056K)], 1.9271636 secs] [Times: user=0.91 sys=0.97, real=1.93 secs] </span><br><span class="line">使用System.gc()进行FullGC，年老代使用CMS垃圾收集器，GC前年老代使用内存为228124K，GC后使用185622K，年老代总内存827392K，整个堆GC前使用350869K，GC后使用185622K，总共内存为1479680K，Metaspace GC前使用313411K，GC后使用313411K，整个Metaspace内存大小为557056K。</span><br></pre></td></tr></table></figure>
 
 <h2 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h2><p>-XX:+UseSerialGC：使用Serial+Serial Old收集器组合。<br>-XX:+UseParNewGC：使用ParNew+Serial Old收集器组合。<br>-XX:+UseParallelGC：使用Parallel Scavenge+Serial Old收集器组合。<br>-XX:+UseParallelOldGC：使用Parallel Scavenge+Parallel Old收集器组合。<br>-XX:+UseConcMarkSweepGC：使用ParNew+CMS+Serial Old收集器组合，Serial Old收集器作为CMS出现“Concurrent Mode Failure”时的后备收集器。</p>
 <h3 id="使用Parallel-Scavenge垃圾收集器可用的参数："><a href="#使用Parallel-Scavenge垃圾收集器可用的参数：" class="headerlink" title="使用Parallel Scavenge垃圾收集器可用的参数："></a>使用Parallel Scavenge垃圾收集器可用的参数：</h3><blockquote>
@@ -492,8 +521,8 @@
       <i class="fa fa-chevron-left"></i> Map
     </a></div>
       <div class="post-nav-item">
-    <a href="/2017/05/09/nio-native/" rel="next" title="JAVA原生NIO示例">
-      JAVA原生NIO示例 <i class="fa fa-chevron-right"></i>
+    <a href="/2017/05/09/mysql-config/" rel="next" title="MySQL配置参数">
+      MySQL配置参数 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -553,7 +582,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#通用参数"><span class="nav-number">1.</span> <span class="nav-text">通用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辅助信息参数"><span class="nav-number">2.</span> <span class="nav-text">辅助信息参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器参数"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集器参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Parallel-Scavenge垃圾收集器可用的参数："><span class="nav-number">3.1.</span> <span class="nav-text">使用Parallel Scavenge垃圾收集器可用的参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用CMS垃圾收集器参数："><span class="nav-number">3.2.</span> <span class="nav-text">使用CMS垃圾收集器参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有并行并发收集器适用参数"><span class="nav-number">3.3.</span> <span class="nav-text">所有并行并发收集器适用参数</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">通用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%85%E5%8A%A9%E4%BF%A1%E6%81%AF%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">辅助信息参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集器参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Parallel-Scavenge%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E5%8F%AF%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">使用Parallel Scavenge垃圾收集器可用的参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8CMS%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">使用CMS垃圾收集器参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%B9%B6%E8%A1%8C%E5%B9%B6%E5%8F%91%E6%94%B6%E9%9B%86%E5%99%A8%E9%80%82%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">所有并行并发收集器适用参数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -652,6 +681,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

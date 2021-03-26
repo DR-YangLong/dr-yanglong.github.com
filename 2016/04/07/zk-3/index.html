@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="命令概览ZooKeeper服务命令: 启动ZK服务:       sh bin&#x2F;zkServer.sh start 查看ZK服务状态: sh bin&#x2F;zkServer.sh status 停止ZK服务:       sh bin&#x2F;zkServer.sh stop 重启ZK服务:       sh bin&#x2F;zkServer.sh restart  zk客户端命令使用zkcli.sh -server">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2016/04/07/zk-3/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="命令概览ZooKeeper服务命令: 启动ZK服务:       sh bin&#x2F;zkServer.sh start 查看ZK服务状态: sh bin&#x2F;zkServer.sh status 停止ZK服务:       sh bin&#x2F;zkServer.sh stop 重启ZK服务:       sh bin&#x2F;zkServer.sh restart  zk客户端命令使用zkcli.sh -server">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-04-07T11:30:00.000Z">
 <meta property="article:modified_time" content="2019-05-24T10:58:43.397Z">
 <meta property="article:author" content="YangLong">
@@ -105,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -134,11 +136,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -231,7 +260,7 @@
 <li>删除文件： delete /zk 将刚才创建的 znode 删除</li>
 <li>退出客户端： quit</li>
 <li>帮助命令： help</li>
-<li>获取节点权限信息：getAcl /zk<br>ZooKeeper 常用四字命令：<a id="more"></a>
+<li>获取节点权限信息：getAcl /zk<br>ZooKeeper 常用四字命令：<span id="more"></span>
 <h2 id="管理命令"><a href="#管理命令" class="headerlink" title="管理命令"></a>管理命令</h2>ZooKeeper支持某些特定的四字命令字母与其的交互。它们大多是查询命令，用来获取 ZooKeeper 服务的当前状态及相关信息。用户在客户端可以通过 telnet 或 nc 向 ZooKeeper 提交相应的命令</li>
 <li>可以通过命令：echo stat|nc 127.0.0.1 2181 来查看哪个节点被选择作为follower或者leader</li>
 <li>使用echo ruok|nc 127.0.0.1 2181 测试是否启动了该Server，若回复imok表示已经启动。</li>
@@ -329,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命令概览"><span class="nav-number">1.</span> <span class="nav-text">命令概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ZooKeeper服务命令"><span class="nav-number">1.1.</span> <span class="nav-text">ZooKeeper服务命令:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zk客户端命令"><span class="nav-number">1.2.</span> <span class="nav-text">zk客户端命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理命令"><span class="nav-number">1.3.</span> <span class="nav-text">管理命令</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A6%82%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">命令概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ZooKeeper%E6%9C%8D%E5%8A%A1%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">ZooKeeper服务命令:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zk%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">zk客户端命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">管理命令</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -428,6 +457,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

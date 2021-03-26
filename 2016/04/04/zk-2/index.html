@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="WIN下zookeeper单机集群版本：Release 3.5.1-alpha 点击下载：http:&#x2F;&#x2F;mirror.reverse.net&#x2F;pub&#x2F;apache&#x2F;zookeeper&#x2F;zookeeper-3.5.1-alpha&#x2F;zookeeper-3.5.1-alpha.tar.gz 说明zookeeper单机集群和集群类似，只不过需要修改zk数据交换端口，选举端口和客户端链接端口 一、配置zoo">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2016/04/04/zk-2/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="WIN下zookeeper单机集群版本：Release 3.5.1-alpha 点击下载：http:&#x2F;&#x2F;mirror.reverse.net&#x2F;pub&#x2F;apache&#x2F;zookeeper&#x2F;zookeeper-3.5.1-alpha&#x2F;zookeeper-3.5.1-alpha.tar.gz 说明zookeeper单机集群和集群类似，只不过需要修改zk数据交换端口，选举端口和客户端链接端口 一、配置zoo">
+<meta property="og:locale">
 <meta property="article:published_time" content="2016-04-04T11:00:56.000Z">
 <meta property="article:modified_time" content="2018-10-17T01:15:15.083Z">
 <meta property="article:author" content="YangLong">
@@ -105,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -134,11 +136,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -215,12 +244,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="WIN下zookeeper单机集群"><a href="#WIN下zookeeper单机集群" class="headerlink" title="WIN下zookeeper单机集群"></a>WIN下zookeeper单机集群</h1><p>版本：Release 3.5.1-alpha 点击下载：<a href="http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz" target="_blank" rel="noopener">http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz</a></p>
+        <h1 id="WIN下zookeeper单机集群"><a href="#WIN下zookeeper单机集群" class="headerlink" title="WIN下zookeeper单机集群"></a>WIN下zookeeper单机集群</h1><p>版本：Release 3.5.1-alpha 点击下载：<a target="_blank" rel="noopener" href="http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz">http://mirror.reverse.net/pub/apache/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz</a></p>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>zookeeper单机集群和集群类似，只不过需要修改zk数据交换端口，选举端口和客户端链接端口</p>
 <h2 id="一、配置zoo-cfg"><a href="#一、配置zoo-cfg" class="headerlink" title="一、配置zoo.cfg"></a>一、配置zoo.cfg</h2><p>将下载的文件解压，先如下配置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=d:\\tmp\\zookeeperA</span><br><span class="line">clientPort=2181</span><br></pre></td></tr></table></figure>
 <p>到d盘创建相应目录，到zk的bin目录下执行zkServer.cmd，先确保单机没问题(如果报错，一般是JDK安装目录带了空格，重装JDK到没有空格的目录然后修改环境变量即可)，成功后关闭zk，并复制zk整个目录，复制2份。然后分别如下修改：</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <blockquote>
 <p>1：</p>
@@ -279,8 +308,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2016/04/03/zk-1/" rel="prev" title="Zookeeper第一课">
-      <i class="fa fa-chevron-left"></i> Zookeeper第一课
+    <a href="/2016/04/03/android/android-1/" rel="prev" title="Android学习第一课">
+      <i class="fa fa-chevron-left"></i> Android学习第一课
     </a></div>
       <div class="post-nav-item">
     <a href="/2016/04/07/zk-3/" rel="next" title="Zookeeper第三课">
@@ -344,7 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WIN下zookeeper单机集群"><span class="nav-number">1.</span> <span class="nav-text">WIN下zookeeper单机集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、配置zoo-cfg"><span class="nav-number">1.2.</span> <span class="nav-text">一、配置zoo.cfg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、创建myid文件"><span class="nav-number">1.3.</span> <span class="nav-text">二、创建myid文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、启动并验证"><span class="nav-number">1.4.</span> <span class="nav-text">三、启动并验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">验证</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WIN%E4%B8%8Bzookeeper%E5%8D%95%E6%9C%BA%E9%9B%86%E7%BE%A4"><span class="nav-number">1.</span> <span class="nav-text">WIN下zookeeper单机集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%85%8D%E7%BD%AEzoo-cfg"><span class="nav-number">1.2.</span> <span class="nav-text">一、配置zoo.cfg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BAmyid%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">二、创建myid文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%AF%E5%8A%A8%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="nav-number">1.4.</span> <span class="nav-text">三、启动并验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">验证</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -443,6 +472,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

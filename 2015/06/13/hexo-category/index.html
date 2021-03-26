@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="** 环境说明**  博客根目录I:\IDEAWorkspace\blog主题根目录：I:\IDEAWorkspace\blog\themes\yilia  分类配置文件说明首先在博客根目录下有一个  _config.yml  配置文件，此配置文件是全局配置文件，具体配置信息参考网上，这里只说分类，打开此文件找到 12archive_dir: archivescategory_dir: categ">
@@ -26,6 +26,7 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/2015/06/13/hexo-category/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="** 环境说明**  博客根目录I:\IDEAWorkspace\blog主题根目录：I:\IDEAWorkspace\blog\themes\yilia  分类配置文件说明首先在博客根目录下有一个  _config.yml  配置文件，此配置文件是全局配置文件，具体配置信息参考网上，这里只说分类，打开此文件找到 12archive_dir: archivescategory_dir: categ">
+<meta property="og:locale">
 <meta property="article:published_time" content="2015-06-13T09:09:56.000Z">
 <meta property="article:modified_time" content="2018-10-17T01:15:15.073Z">
 <meta property="article:author" content="YangLong">
@@ -106,6 +107,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -135,11 +137,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -228,33 +257,33 @@
 <p>127.0.0.1:4000/categories/{我们定义的分类}</p>
 </blockquote>
 <p>那么分类如何定义呢？</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="定义分类"><a href="#定义分类" class="headerlink" title="定义分类"></a>定义分类</h2><p>首先，打开主题根目录（I:\IDEAWorkspace\blog\themes\yilia\）下的  <strong>layout</strong>  文件夹，看有没有</p>
 <blockquote>
 <p>category.ejs</p>
 </blockquote>
 <p>文件，如果没有，新建一个，并写入以下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(<span class="string">'_partial/archive'</span>, &#123;pagination: config.category, index: <span class="literal">true</span>&#125;) %&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(<span class="string">&#x27;_partial/archive&#x27;</span>, &#123;pagination: config.category, index: <span class="literal">true</span>&#125;) %&gt;</span><br></pre></td></tr></table></figure>
 <p>打开同级目录下的  <strong>_partial/post</strong>  文件夹，查看有没有</p>
 <blockquote>
 <p>category.ejs</p>
 </blockquote>
 <p>文件，如果没有，新建一个，并写入以下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (post.categories &amp;&amp; post.categories.length)&#123; %&gt;</span><br><span class="line">	&lt;div class=<span class="string">"article-category tagcloud"</span>&gt;</span><br><span class="line">	&lt;%- list_categories(post.categories, &#123;</span><br><span class="line">	  show_count: <span class="literal">false</span>,</span><br><span class="line">	  class: <span class="string">'article-category'</span>,</span><br><span class="line">	  style: <span class="string">'none'</span>,</span><br><span class="line">	  separator: <span class="string">''</span></span><br><span class="line">	&#125;) %&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (post.categories &amp;&amp; post.categories.length)&#123; %&gt;</span><br><span class="line">	&lt;div class=<span class="string">&quot;article-category tagcloud&quot;</span>&gt;</span><br><span class="line">	&lt;%- list_categories(post.categories, &#123;</span><br><span class="line">	  show_count: <span class="literal">false</span>,</span><br><span class="line">	  class: <span class="string">&#x27;article-category&#x27;</span>,</span><br><span class="line">	  style: <span class="string">&#x27;none&#x27;</span>,</span><br><span class="line">	  separator: <span class="string">&#x27;&#x27;</span></span><br><span class="line">	&#125;) %&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>然后，打开根目录（I:\IDEAWorkspace\blog）下  <strong>scaffolds</strong>  目录，打开里面的3个md文件，并在每个文件中添加一行</p>
 <blockquote>
 <p>categories:</p>
 </blockquote>
 <p>例如  <strong>post.md</strong>  添加完后如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这里只是让我们运行</p>
 <blockquote>
 <p>hexo new page “pageName”</p>
 </blockquote>
 <p>的时候生成如下的文件内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: pageName</span><br><span class="line">date: 2015-06-13 17:09:56</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: pageName</span><br><span class="line">date: 2015-06-13 17:09:56</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>###接下来我们给文章添加分类，并让分类能够列出所有一样的分类文章</p>
 <p>####给文章添加分类<br>新建一个md文件，填入内容：</p>
@@ -389,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类配置文件说明"><span class="nav-number">1.</span> <span class="nav-text">分类配置文件说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义分类"><span class="nav-number">2.</span> <span class="nav-text">定义分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可以看到，文章分类的访问路径组成，首先在项目根目录下配置分类的访问路径，本例中是默认的"><span class="nav-number">3.</span> <span class="nav-text">可以看到，文章分类的访问路径组成，首先在项目根目录下配置分类的访问路径，本例中是默认的</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">分类配置文件说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">定义分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%EF%BC%8C%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E8%B7%AF%E5%BE%84%E7%BB%84%E6%88%90%EF%BC%8C%E9%A6%96%E5%85%88%E5%9C%A8%E9%A1%B9%E7%9B%AE%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%88%86%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E8%B7%AF%E5%BE%84%EF%BC%8C%E6%9C%AC%E4%BE%8B%E4%B8%AD%E6%98%AF%E9%BB%98%E8%AE%A4%E7%9A%84"><span class="nav-number">3.</span> <span class="nav-text">可以看到，文章分类的访问路径组成，首先在项目根目录下配置分类的访问路径，本例中是默认的</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -488,6 +517,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

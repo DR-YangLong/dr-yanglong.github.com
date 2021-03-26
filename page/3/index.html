@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"dr-yanglong.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":false,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="java笔记，spring，shiro笔记">
@@ -26,12 +26,9 @@
 <meta property="og:url" content="https://dr-yanglong.github.io/page/3/index.html">
 <meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="java笔记，spring，shiro笔记">
+<meta property="og:locale">
 <meta property="article:author" content="YangLong">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="spring">
-<meta property="article:tag" content="zookeeper">
-<meta property="article:tag" content="jvm">
-<meta property="article:tag" content="android">
+<meta property="article:tag" content="java,spring,zookeeper,jvm,android">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dr-yanglong.github.io/page/3/">
@@ -106,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -135,11 +133,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -218,95 +243,13 @@
       
           <h1 id="java之continue，break，goto"><a href="#java之continue，break，goto" class="headerlink" title="java之continue，break，goto"></a>java之continue，break，goto</h1><p>先说goto，goto是java中保留关键字，实际并未使用，goto在c中很强大，直接中断当前执行流程跳转到标记所在的流程点开始执行，但是这种能力不好掌控。<br>java中可以使用continue和break加标签达到类似的效果。</p>
 <h2 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h2><p>continue在循环内部使用时，中断后面的代码执行，直接开始下一次循环。结合标签使用时，直接执行标签后面的循环代码的下一次循环：           </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//continue单层循环，output:13579</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span>;<span class="comment">//当偶数时跳过后面的执行语句，直接继续increment语句</span></span><br><span class="line">        <span class="comment">//打印j</span></span><br><span class="line">        System.out.print(j);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"\n==========="</span>);</span><br><span class="line">    <span class="comment">//等同上面</span></span><br><span class="line">    outer:</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span> outer;</span><br><span class="line">        System.out.print(i);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"\n==========="</span>);</span><br><span class="line">    outer:</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//跳到outer处的increment语句执行</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span> outer;</span><br><span class="line">            System.out.println(<span class="string">"inner:"</span> + j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//j的循环每次continue到i++，使得此处永不执行</span></span><br><span class="line">        System.out.println(<span class="string">"outer:"</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//continue单层循环，output:13579</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span>;<span class="comment">//当偶数时跳过后面的执行语句，直接继续increment语句</span></span><br><span class="line">        <span class="comment">//打印j</span></span><br><span class="line">        System.out.print(j);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;\n===========&quot;</span>);</span><br><span class="line">    <span class="comment">//等同上面</span></span><br><span class="line">    outer:</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span> outer;</span><br><span class="line">        System.out.print(i);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;\n===========&quot;</span>);</span><br><span class="line">    outer:</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//跳到outer处的increment语句执行</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span> outer;</span><br><span class="line">            System.out.println(<span class="string">&quot;inner:&quot;</span> + j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//j的循环每次continue到i++，使得此处永不执行</span></span><br><span class="line">        System.out.println(<span class="string">&quot;outer:&quot;</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="break"><a href="#break" class="headerlink" title="break"></a>break</h2><p>break在循环内部使用时，中断后面代码执行并跳出<strong>当前</strong>循环，执行循环后面的代码，结合标签使用时，表示结束标签后的代码块执行，转而执行后面的代码。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//output:012</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(i&gt;<span class="number">2</span>)<span class="keyword">break</span>;</span><br><span class="line">    System.out.print(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * outer:1</span></span><br><span class="line"><span class="comment"> * inner not break:2</span></span><br><span class="line"><span class="comment"> * outer:3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; ) &#123;</span><br><span class="line">    <span class="keyword">while</span> (i++&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">2</span>) <span class="keyword">break</span>;<span class="comment">//i&lt;2时结束内层循环</span></span><br><span class="line">        System.out.println(<span class="string">"inner not break:"</span>+i);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"outer:"</span>+i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * break-inner[j]:0</span></span><br><span class="line"><span class="comment"> * break-inner[j]:1</span></span><br><span class="line"><span class="comment"> * break-inner[j]:2</span></span><br><span class="line"><span class="comment"> * break-end</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">outer:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;<span class="number">5</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>&amp;&amp;j==<span class="number">3</span>)<span class="keyword">break</span> outer;<span class="comment">//外层循环第一次执行，内层循环第4次执行时，中断标签后的循环代码块</span></span><br><span class="line">        System.out.println(<span class="string">"break-inner[j]:"</span>+j);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"break-outer[i]:"</span>+i);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">"break-end"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//output:012</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(i&gt;<span class="number">2</span>)<span class="keyword">break</span>;</span><br><span class="line">    System.out.print(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * outer:1</span></span><br><span class="line"><span class="comment"> * inner not break:2</span></span><br><span class="line"><span class="comment"> * outer:3</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; ) &#123;</span><br><span class="line">    <span class="keyword">while</span> (i++&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">2</span>) <span class="keyword">break</span>;<span class="comment">//i&lt;2时结束内层循环</span></span><br><span class="line">        System.out.println(<span class="string">&quot;inner not break:&quot;</span>+i);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;outer:&quot;</span>+i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * break-inner[j]:0</span></span><br><span class="line"><span class="comment"> * break-inner[j]:1</span></span><br><span class="line"><span class="comment"> * break-inner[j]:2</span></span><br><span class="line"><span class="comment"> * break-end</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">outer:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;<span class="number">5</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>&amp;&amp;j==<span class="number">3</span>)<span class="keyword">break</span> outer;<span class="comment">//外层循环第一次执行，内层循环第4次执行时，中断标签后的循环代码块</span></span><br><span class="line">        System.out.println(<span class="string">&quot;break-inner[j]:&quot;</span>+j);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;break-outer[i]:&quot;</span>+i);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;break-end&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<h2 id="continue和break结合"><a href="#continue和break结合" class="headerlink" title="continue和break结合"></a>continue和break结合</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * level_4[m]-0</span></span><br><span class="line"><span class="comment"> * level_2[k]-0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">level_1:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;<span class="number">2</span>; j++) &#123;</span><br><span class="line">    level_2:</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;<span class="number">3</span>; k++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">2</span>)<span class="keyword">break</span> level_1;<span class="comment">//k&lt;2时执行level_3</span></span><br><span class="line">        level_3:</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt;<span class="number">2</span>; l++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k==<span class="number">1</span>)<span class="keyword">continue</span> level_2;<span class="comment">//只有k=0时执行了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt;<span class="number">2</span>; m++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(m==<span class="number">1</span>)<span class="keyword">break</span> level_3;<span class="comment">//只有k=0&amp;&amp;m=0时执行了，当m&gt;0时直接结束了level_3语句块</span></span><br><span class="line">                System.out.println(<span class="string">"level_4[m]-"</span>+m);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"level_3[l]-"</span>+l);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//k=0&amp;&amp;m=0执行，之后循环k=1，触发level_3的continue level_2，</span></span><br><span class="line">        <span class="comment">//直接k=2，然后触发break level_1，结束整段代码</span></span><br><span class="line">        System.out.println(<span class="string">"level_2[k]-"</span>+k);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"level_1[j]-"</span>+j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="continue和break结合"><a href="#continue和break结合" class="headerlink" title="continue和break结合"></a>continue和break结合</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * level_4[m]-0</span></span><br><span class="line"><span class="comment"> * level_2[k]-0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">level_1:</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;<span class="number">2</span>; j++) &#123;</span><br><span class="line">    level_2:</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;<span class="number">3</span>; k++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">2</span>)<span class="keyword">break</span> level_1;<span class="comment">//k&lt;2时执行level_3</span></span><br><span class="line">        level_3:</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt;<span class="number">2</span>; l++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k==<span class="number">1</span>)<span class="keyword">continue</span> level_2;<span class="comment">//只有k=0时执行了</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt;<span class="number">2</span>; m++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(m==<span class="number">1</span>)<span class="keyword">break</span> level_3;<span class="comment">//只有k=0&amp;&amp;m=0时执行了，当m&gt;0时直接结束了level_3语句块</span></span><br><span class="line">                System.out.println(<span class="string">&quot;level_4[m]-&quot;</span>+m);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;level_3[l]-&quot;</span>+l);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//k=0&amp;&amp;m=0执行，之后循环k=1，触发level_3的continue level_2，</span></span><br><span class="line">        <span class="comment">//直接k=2，然后触发break level_1，结束整段代码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;level_2[k]-&quot;</span>+k);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;level_1[j]-&quot;</span>+j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2017/05/09/mysql-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/head.png">
-      <meta itemprop="name" content="YangLong">
-      <meta itemprop="description" content="java笔记，spring，shiro笔记">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人JAVA开发笔记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/09/mysql-config/" class="post-title-link" itemprop="url">MySQL配置参数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-05-09 12:00:56" itemprop="dateCreated datePublished" datetime="2017-05-09T12:00:56+08:00">2017-05-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-10-17 10:58:58" itemprop="dateModified" datetime="2018-10-17T10:58:58+08:00">2018-10-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="mysql参数说明"><a href="#mysql参数说明" class="headerlink" title="mysql参数说明"></a>mysql参数说明</h2><p>转载自<a href="https://blog.linuxeye.cn/379.html" target="_blank" rel="noopener">MySQL性能调优my.cnf详解 | Linux运维笔记</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[client]  </span><br><span class="line">port &#x3D; 3306  </span><br><span class="line">socket &#x3D; &#x2F;tmp&#x2F;mysql.sock  </span><br><span class="line">  </span><br><span class="line">[mysqld]  </span><br><span class="line">port &#x3D; 3306  </span><br><span class="line">socket &#x3D; &#x2F;tmp&#x2F;mysql.sock  </span><br><span class="line">  </span><br><span class="line">basedir &#x3D; &#x2F;usr&#x2F;local&#x2F;mysql  </span><br><span class="line">datadir &#x3D; &#x2F;data&#x2F;mysql  </span><br><span class="line">pid-file &#x3D; &#x2F;data&#x2F;mysql&#x2F;mysql.pid  </span><br><span class="line">user &#x3D; mysql  </span><br><span class="line">bind-address &#x3D; 0.0.0.0  </span><br><span class="line">server-id &#x3D; 1 #表示是本机的序号为1,一般来讲就是master的意思</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/09/mysql-config/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -383,6 +326,88 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/05/09/nio-native/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2017/05/09/mysql-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/head.png">
+      <meta itemprop="name" content="YangLong">
+      <meta itemprop="description" content="java笔记，spring，shiro笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人JAVA开发笔记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/05/09/mysql-config/" class="post-title-link" itemprop="url">MySQL配置参数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-05-09 12:00:56" itemprop="dateCreated datePublished" datetime="2017-05-09T12:00:56+08:00">2017-05-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-10-17 10:58:58" itemprop="dateModified" datetime="2018-10-17T10:58:58+08:00">2018-10-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="mysql参数说明"><a href="#mysql参数说明" class="headerlink" title="mysql参数说明"></a>mysql参数说明</h2><p>转载自<a target="_blank" rel="noopener" href="https://blog.linuxeye.cn/379.html">MySQL性能调优my.cnf详解 | Linux运维笔记</a></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[client]  </span><br><span class="line">port = 3306  </span><br><span class="line">socket = /tmp/mysql.sock  </span><br><span class="line">  </span><br><span class="line">[mysqld]  </span><br><span class="line">port = 3306  </span><br><span class="line">socket = /tmp/mysql.sock  </span><br><span class="line">  </span><br><span class="line">basedir = /usr/local/mysql  </span><br><span class="line">datadir = /data/mysql  </span><br><span class="line">pid-file = /data/mysql/mysql.pid  </span><br><span class="line">user = mysql  </span><br><span class="line">bind-address = 0.0.0.0  </span><br><span class="line">server-id = 1 #表示是本机的序号为1,一般来讲就是master的意思  </span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/05/09/mysql-config/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -686,7 +711,7 @@
 <blockquote>
 <p>l=n/N</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map散列表结构解决碰撞的方法有：</span><br><span class="line">设H为映射的Key通过散列函数计算得到的值，N桶数量（为存储映射的数组的length），L为装载因子&#x3D;n(每个桶容量)&#x2F;N。j为正整数（j&#x3D;1,2,3...）。</span><br><span class="line">1. 开放地址策略。采用开放地址策略的方式是使用数组本身来解决下标冲突，本质都是在遇到碰撞时，将后入的映射向后移动，此策略缺点是性能随元素的增加和碰撞概率（碰撞概率也随元素增加而上升）上升而下降，优点是节省空间，不需要借助额外的空间来解决冲突。线性探测法，遇到碰撞后执行(H+1)%N得到新的下标j，发现j已被占用，再执行(H+2)%N，如此，直到得到的下标能够存入数组。平方探测法，遇到冲突，使用循环(H + j^2)%N的方式直到元素能够存入数组。前2个方法在L大于0.5时，会造成大量元素集聚（线性连续集聚，平方二阶集聚），使得即使存在空桶，也有可能找不到插入的位置。双散列法，除原有散列函数外，再选取另外一个散列函数g()作为二阶散列函数，使得任意g(key)不为0，不断使用H + j*g(key)获取新下标，直到能够存入元素。</span><br><span class="line">2. 分离链策略。分离链策略是将冲突的元素使用链表的形势存储在同一个数组下标处，形成一个列表数据结构，对映射的操作转变为对列表的操作。这种策略下的方法叫做链地址法。此策略缺点是需要额外的空间存储链表，优点是性能稳定且较高。</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map散列表结构解决碰撞的方法有：</span><br><span class="line">设H为映射的Key通过散列函数计算得到的值，N桶数量（为存储映射的数组的length），L为装载因子=n(每个桶容量)/N。j为正整数（j=1,2,3...）。</span><br><span class="line">1. 开放地址策略。采用开放地址策略的方式是使用数组本身来解决下标冲突，本质都是在遇到碰撞时，将后入的映射向后移动，此策略缺点是性能随元素的增加和碰撞概率（碰撞概率也随元素增加而上升）上升而下降，优点是节省空间，不需要借助额外的空间来解决冲突。线性探测法，遇到碰撞后执行(H+1)%N得到新的下标j，发现j已被占用，再执行(H+2)%N，如此，直到得到的下标能够存入数组。平方探测法，遇到冲突，使用循环(H + j^2)%N的方式直到元素能够存入数组。前2个方法在L大于0.5时，会造成大量元素集聚（线性连续集聚，平方二阶集聚），使得即使存在空桶，也有可能找不到插入的位置。双散列法，除原有散列函数外，再选取另外一个散列函数g()作为二阶散列函数，使得任意g(key)不为0，不断使用H + j*g(key)获取新下标，直到能够存入元素。</span><br><span class="line">2. 分离链策略。分离链策略是将冲突的元素使用链表的形势存储在同一个数组下标处，形成一个列表数据结构，对映射的操作转变为对列表的操作。这种策略下的方法叫做链地址法。此策略缺点是需要额外的空间存储链表，优点是性能稳定且较高。</span><br></pre></td></tr></table></figure>
 <p>map存储键值对，有的map允许null值key和value，有的不允许。存取value时通过key判断取值，会涉及key对象的2个方法，equals和hashCode。如果使用重写equals和hashCode方法的类实例化的对象作为key时需要注意可能导致映射不正确（不同的对象会被当成一个对象处理）。如果使用可变对象（修改对象属性值时会对equals产生影响）作为key时，会使映射关系不正确，禁止某个map将自身作为key在自身建立映射。value的equals及hashCode同样影响map对于value的操作。<br>所有map实现都有2个构造函数，一个默认构造函数，一个以map作为参数的构造函数。<br>map提供3个视图：key视图（keySet），value视图(values)，key-value视图(entrySet)。映射的顺序依赖map的具体实现，由迭代器返回元素的顺序决定。<br>map基础结构为Entry&lt;K,V&gt;结构。</p>
           <!--noindex-->
             <div class="post-button">
@@ -1040,8 +1065,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Kernel-4-9-无法安装VMPlayer-vmnet问题解决"><a href="#Kernel-4-9-无法安装VMPlayer-vmnet问题解决" class="headerlink" title="Kernel 4.9+无法安装VMPlayer vmnet问题解决"></a>Kernel 4.9+无法安装VMPlayer vmnet问题解决</h1><p>今天一早升级线上服务器的open ssh，然后升级了下自己的ubuntu，采用的是apt update+upgrade命令。<br>之后悲剧的发现vmplayer跪了，用度娘找了下，就只有一篇有价值的文章，说在国外论坛看到的，下载了个patch文件。<br>后来看了看，不适用，最后用手机热点翻墙（公司2M小水管，国内打开网页速度都感人），终于在<a href="http://rglinuxtech.com/?p=1838" target="_blank" rel="noopener">http://rglinuxtech.com/?p=1838</a><br>看到了问题所在和解决方案，在这里重复下解决方案。其他内核版本也可以参照此方法解决。</p>
-<h2 id="日志异常"><a href="#日志异常" class="headerlink" title="日志异常"></a>日志异常</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I125: Setting destination path <span class="keyword">for</span> vmnet to <span class="string">"/lib/modules/4.9.0-11-generic/misc/vmnet.ko"</span>.</span><br><span class="line">I125: Extracting the vmnet <span class="built_in">source</span> from <span class="string">"/usr/lib/vmware/modules/source/vmnet.tar"</span>.</span><br><span class="line">I125: Successfully extracted the vmnet <span class="built_in">source</span>.</span><br><span class="line">I125: Building module with <span class="built_in">command</span> <span class="string">"/usr/bin/make -j4 -C /tmp/modconfig-Zu8VZj/vmnet-only auto-build HEADER_DIR=/lib/modules/4.9.0-11-generic/build/include CC=/usr/bin/gcc IS_GCC_3=no"</span></span><br><span class="line">W115: Failed to build vmnet.  Failed to execute the build <span class="built_in">command</span>.</span><br></pre></td></tr></table></figure>
+          <h1 id="Kernel-4-9-无法安装VMPlayer-vmnet问题解决"><a href="#Kernel-4-9-无法安装VMPlayer-vmnet问题解决" class="headerlink" title="Kernel 4.9+无法安装VMPlayer vmnet问题解决"></a>Kernel 4.9+无法安装VMPlayer vmnet问题解决</h1><p>今天一早升级线上服务器的open ssh，然后升级了下自己的ubuntu，采用的是apt update+upgrade命令。<br>之后悲剧的发现vmplayer跪了，用度娘找了下，就只有一篇有价值的文章，说在国外论坛看到的，下载了个patch文件。<br>后来看了看，不适用，最后用手机热点翻墙（公司2M小水管，国内打开网页速度都感人），终于在<a target="_blank" rel="noopener" href="http://rglinuxtech.com/?p=1838">http://rglinuxtech.com/?p=1838</a><br>看到了问题所在和解决方案，在这里重复下解决方案。其他内核版本也可以参照此方法解决。</p>
+<h2 id="日志异常"><a href="#日志异常" class="headerlink" title="日志异常"></a>日志异常</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">I125: Setting destination path <span class="keyword">for</span> vmnet to <span class="string">&quot;/lib/modules/4.9.0-11-generic/misc/vmnet.ko&quot;</span>.</span><br><span class="line">I125: Extracting the vmnet <span class="built_in">source</span> from <span class="string">&quot;/usr/lib/vmware/modules/source/vmnet.tar&quot;</span>.</span><br><span class="line">I125: Successfully extracted the vmnet <span class="built_in">source</span>.</span><br><span class="line">I125: Building module with <span class="built_in">command</span> <span class="string">&quot;/usr/bin/make -j4 -C /tmp/modconfig-Zu8VZj/vmnet-only auto-build HEADER_DIR=/lib/modules/4.9.0-11-generic/build/include CC=/usr/bin/gcc IS_GCC_3=no&quot;</span></span><br><span class="line">W115: Failed to build vmnet.  Failed to execute the build <span class="built_in">command</span>.</span><br></pre></td></tr></table></figure>
 <p>关键点就是<strong>4.9.0-11-generic</strong>刚升级的内核，太新了，vm无法识别。</p>
           <!--noindex-->
             <div class="post-button">
@@ -1069,7 +1094,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2016/09/08/Collection-List/">
+    <link itemprop="mainEntityOfPage" href="https://dr-yanglong.github.io/2016/09/08/git-flow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/head.png">
@@ -1083,7 +1108,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/09/08/Collection-List/" class="post-title-link" itemprop="url">Collection之List</a>
+            <a href="/2016/09/08/git-flow/" class="post-title-link" itemprop="url">Git Flow使用</a>
         </h2>
 
         <div class="post-meta">
@@ -1100,7 +1125,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-26 10:08:38" itemprop="dateModified" datetime="2019-07-26T10:08:38+08:00">2019-07-26</time>
+                <time title="Modified: 2019-07-11 09:02:16" itemprop="dateModified" datetime="2019-07-11T09:02:16+08:00">2019-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1108,7 +1133,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
                 </span>
             </span>
 
@@ -1123,11 +1148,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>ArrayList由Object数组构成,用int类型的size属性记录数组中实际对象的数量，实现了随机访问接口RandomAccess。默认容量是10，最大容量为Integer.MAX_VALUE-8。使用int modCount记录结构变更（增减数组长度）次数，使用指针迭代ArrayList时，<br>指针中的expectedModCount初始为modCount，当在迭代中发现expectedModCount和modCount不相等时，认为结构被其他线程改变了，此时将抛出异常。<br>每次插入、批量新增和删除元素都会对结构作出改变，并对modCount+1，底层通过使用System.arraycopy实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @param      src      the source array.源数组。</span></span><br><span class="line"><span class="comment"> * @param      srcPos   starting position in the source array.要复制的起始位置,包含此位置的元素。</span></span><br><span class="line"><span class="comment"> * @param      dest     the destination array.目标数组。</span></span><br><span class="line"><span class="comment"> * @param      destPos  starting position in the destination data.目标数组放置复制元素的其实位置。</span></span><br><span class="line"><span class="comment"> * @param      length   the number of array elements to be copied.要从源数组复制的元素数量。</span></span><br><span class="line"><span class="comment"> * @exception  IndexOutOfBoundsException  if copying would cause</span></span><br><span class="line"><span class="comment"> *               access of data outside array bounds.</span></span><br><span class="line"><span class="comment"> * @exception  ArrayStoreException  if an element in the &lt;code&gt;src&lt;/code&gt;</span></span><br><span class="line"><span class="comment"> *               array could not be stored into the &lt;code&gt;dest&lt;/code&gt; array</span></span><br><span class="line"><span class="comment"> *               because of a type mismatch.</span></span><br><span class="line"><span class="comment"> * @exception  NullPointerException if either &lt;code&gt;src&lt;/code&gt; or</span></span><br><span class="line"><span class="comment"> *               &lt;code&gt;dest&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object src,  <span class="keyword">int</span>  srcPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    Object dest, <span class="keyword">int</span> destPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    <span class="keyword">int</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
+          <h1 id="git-flow入门"><a href="#git-flow入门" class="headerlink" title="git flow入门"></a>git flow入门</h1><p>软件在开发中的周期为：新功能定义-&gt;新功能实现-&gt;新功能测试-&gt;新功能BUG修复-&gt;新功能发布上线-&gt;紧急线上bug修复；<br>使用git的分支以及分支合并可以很好的完成各周期对应的实际操作，但是必须熟知git命令并且规范性比较差，git flow是一个基于git的工作流规范工具。<br>它集成了git的分支，tag等命令，整合为软件开发周期中的各个阶段，可以很容易就实现软件的规范化开发。<br>基本流程图（来源于博客ngulc，不再重复画了）：<br><img src="https://images2015.cnblogs.com/blog/805129/201608/805129-20160814142051093-1392948534.png" alt="FLOW"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2016/09/08/Collection-List/#more" rel="contents">
+              <a class="btn" href="/2016/09/08/git-flow/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1301,6 +1325,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
