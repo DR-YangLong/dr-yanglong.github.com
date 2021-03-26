@@ -6,15 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://dr-yanglong.github.io">
-  <title>编程小记</title>
+  <title>个人JAVA开发笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="java笔记，spring，shiro笔记">
 <meta property="og:type" content="website">
-<meta property="og:title" content="编程小记">
+<meta property="og:title" content="个人JAVA开发笔记">
 <meta property="og:url" content="https://dr-yanglong.github.io/page/4/index.html">
-<meta property="og:site_name" content="编程小记">
+<meta property="og:site_name" content="个人JAVA开发笔记">
 <meta property="og:description" content="java笔记，spring，shiro笔记">
-<meta property="article:author" content="Dr.YangLong">
+<meta property="article:author" content="YangLong">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="spring">
 <meta property="article:tag" content="zookeeper">
@@ -50,7 +50,7 @@
 			<img src="/head.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Dr.YangLong</a></h1>
+		  <h1 class="header-author"><a href="/">YangLong</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">java后端笔记</p>
@@ -92,7 +92,6 @@
 					<a class="mail" target="_blank" href="mailto: 410357434@163.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
-			<a href="http://www.beian.miit.gov.cn" target="_blank">浙ICP备18013866号-1</a>
 		</nav>
 	</header>		
 </div>
@@ -111,7 +110,7 @@
 				<img src="/head.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Dr.YangLong</h1>
+			  <h1 class="header-author js-header-author">YangLong</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>java后端笔记<i class="icon icon-quo-right"></i></p>
@@ -895,13 +894,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="maven入门"><a href="#maven入门" class="headerlink" title="maven入门"></a>maven入门</h1><h2 id="为什么要使用maven"><a href="#为什么要使用maven" class="headerlink" title="为什么要使用maven"></a>为什么要使用maven</h2><h3 id="Maven是什么"><a href="#Maven是什么" class="headerlink" title="Maven是什么"></a>Maven是什么</h3><blockquote>
-<p>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</p>
+<p>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information. </p>
 </blockquote>
-<p>maven是一个跨平台的项目管理和构建工具。</p>
-<h3 id="为什么要使用Maven"><a href="#为什么要使用Maven" class="headerlink" title="为什么要使用Maven"></a>为什么要使用Maven</h3><p>maven使用一个xml配置文件管理项目的相关依赖信息以及构建信息，项目的所有相关设置都在这个入口进行，降低了管理的复杂的。与传统项目构建方式相比，maven将对lib的强依赖转换为引用依赖，一定程度上的减少了不同项目对依赖jar的重复添加。</p>
-<blockquote>
-<p>EG:project1需要使用jstl.jar，project2也需要使用jstl.jar，以往的方式是在2个项目的lib中都放入jstl.jar文件，也就是说在计算机里会同时有2个一样的jar包（另外可以使用引入的方式避免重复，但一般都不会这样做，因为协作的时候不应该依赖本地环境），如果N的项目，那简直爆炸了。如果使用maven，那么我们只需在配置文件中配置一下就解决了问题，所有的项目都将使用同一个jar，至于删除，那没关系，maven会自动去<strong>仓库</strong>下载此jar。</p>
-</blockquote>
+<p>maven是一个跨平台的项目管理和构建工具。maven的核心理念是约定大于配置，maven本身已经提供了一套默认设置，这意味着很多东西，使用Maven时都已经默认配置好了，使用者除非必要，不需要去修改那些约定好的内容，比如项目结构，插件等等。</p>
+<h3 id="为什么要使用Maven"><a href="#为什么要使用Maven" class="headerlink" title="为什么要使用Maven"></a>为什么要使用Maven</h3><p>maven使用一个xml配置文件管理项目的相关依赖信息以及构建信息，项目的所有相关设置都在这个入口进行，降低了项目管理的复杂度：进行项目中依赖jar版本统一管理，使项目与开发环境（本地配置，开发工具）解耦。与传统项目构建方式相比，maven将对lib的强依赖转换为引用依赖，一定程度上的减少了不同项目对依赖jar的重复添加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eg:</span><br><span class="line">project1需要使用jstl.jar，project2也需要使用jstl.jar，以往的方式是在2个项目的lib中都放入jstl.jar文件。</span><br><span class="line">也就是说在计算机里会同时有2个一样的jar包（另外可以使用引入的方式避免重复，但一般都不会这样做，因为协作的时候不应该依赖本地环境）。</span><br><span class="line">如果有N个项目，那简直爆炸了，相同jar包被在本机存在了N个。如果使用maven，那么我们只需在配置文件中配置一下就解决了问题，所有的项目都将使用同一个jar，至于删除，那没关系，maven会自动去仓库下载此jar。</span><br></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2016/05/03/maven-guide/#more">more >></a>
         
@@ -1188,7 +1185,7 @@
 	<div class="outer">
 		<div id="footer-info">
 			<div class="footer-left">
-				&copy; 2020 Dr.YangLong
+				&copy; 2021 YangLong
 			</div>
 			<div style="float: left;margin-left: 30%;">
 				<a href="http://www.beian.miit.gov.cn" target="_blank">浙ICP备18013866号-1</a>
