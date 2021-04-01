@@ -1221,7 +1221,7 @@
 
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cn.lvkebang.xmall.common.lang.StringSeriesTools;</span><br><span class="line"><span class="keyword">import</span> org.apache.shiro.util.Assert;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * functional describe:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DR.YangLong [410357434@163.com]</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0    2018/2/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KryoTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//随机生成字符串</span></span><br><span class="line">        String str= StringSeriesTools.getRanDomStr(<span class="number">8</span>,<span class="number">1</span>);</span><br><span class="line">        CustomKryoFactory factory=<span class="keyword">new</span> CustomKryoFactory();</span><br><span class="line">        KryoSerializer serializer=<span class="keyword">new</span> KryoSerializer(factory);</span><br><span class="line">        <span class="keyword">byte</span>[] bytes=serializer.serialize(str);</span><br><span class="line">        Object obj=serializer.deserialize(bytes);</span><br><span class="line">        Assert.isTrue(str.equals(obj.toString()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>java</tag>
@@ -2073,7 +2073,7 @@
 <p>最后重新启动即可安装vmnet，injoy!</p>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>linux</category>
       </categories>
       <tags>
         <tag>linux</tag>
