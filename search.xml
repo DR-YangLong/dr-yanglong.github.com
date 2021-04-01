@@ -375,7 +375,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>github</tag>
@@ -585,7 +585,7 @@
 <p>来从一个commitId恢复分支出来，新分支名称就是[name]。</p>
 ]]></content>
       <categories>
-        <category>java</category>
+        <category>git</category>
       </categories>
       <tags>
         <tag>java</tag>
@@ -633,10 +633,10 @@
 </ol>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>Collection</tag>
+        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
@@ -1114,6 +1114,7 @@
       </categories>
       <tags>
         <tag>java</tag>
+        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
@@ -1202,10 +1203,11 @@
 <h1 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h1><p>对象优先在Eden分配。大对象（例如超长字符串，数组）直接进入年老代。长期存活的对象进入年老代（默认经过15次GC，可用调节参数）。如果Survivor空间中相同年龄所有对象大小总和超过survivor空间的一半，年龄大于或等于该年龄的对象直接进入年老代，无须等到jvm设置的年龄要求。</p>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>java</tag>
+        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
@@ -3847,10 +3849,11 @@
 </ol>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>java</tag>
+        <tag>jvm</tag>
       </tags>
   </entry>
   <entry>
